@@ -1,4 +1,4 @@
-package bangshop.music.common.template;
+package template;
 
 import java.io.FileReader;
 import java.io.IOException;
