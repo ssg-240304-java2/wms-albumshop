@@ -1,4 +1,4 @@
 package bangshop.music.common.error;
 
-public class arrorView {
+public class ErrorView {
 }
