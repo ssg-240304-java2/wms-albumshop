@@ -1,17 +1,23 @@
 package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
-import bangshop.music.controller.DispatchController;
-import bangshop.music.controller.EmployeeController;
+
+
 import bangshop.music.controller.storageController;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
-import java.util.Map;
 import java.util.Scanner;
 
+import bangshop.music.controller.EmployeeController;
+
+import java.util.Map;
+
 import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
+
+import bangshop.music.controller.DispatchController;
+
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
@@ -34,17 +40,16 @@ public class StorageAdminView {
                     case STOCK_IN ->
                             storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
                     case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
-//                case STOCK_IN ->//TODO: 앨범 입고
-//                case STOCK_IN_LIST ->//TODO: 앨범 입고 내역 조회
-                    case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
-                    case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
-                    case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
                         dispatchController.dispatch();
                     }
                     case STOCK_OUT_LIST -> dispatchController.findStockOuts(StockOutStatus.COMPLETE);
+                    case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
+                    case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
+                    case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
                     case LOG_OUT -> {
+                        System.out.println();
                         return;
                     }
                 }
