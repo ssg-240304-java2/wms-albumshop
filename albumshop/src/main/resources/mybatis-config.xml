@@ -15,13 +15,17 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://mysql.coffit.today:3306/bangdb"/>
+                <property name="url" value="jdbc:mysql://dokalab.asuscomm.com:50133/bangdb"/>
                 <property name="username" value="bang"/>
                 <property name="password" value="bang"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+        <mapper resource="sql/mapper/cy-query.xml"/>
+<!--        <mapper resource="sql/mapper/db-query.xml"/>-->
+<!--        <mapper resource="sql/mapper/jh-query.xml"/>-->
+<!--        <mapper resource="sql/mapper/sc-query.xml"/>-->
+<!--        <mapper resource="sql/mapper/yr-query.xml"/>-->
     </mappers>
 </configuration>

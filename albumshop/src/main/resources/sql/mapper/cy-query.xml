@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-</properties>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.EmployeeMapper">
+    <insert id="insertEmployee">
+        insert into employee (name, id, password, role_no) values (#{name}, #{id}, #{password}, #{roleNo})
+    </insert>
+
+    <select id="findEmployeeByIdAndPassword" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
+        select * from employee where id=#{id} and password=#{password}
+    </select>
+
+    <select id="findEmployeeById" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
+        select * from employee where id=#{id}
+    </select>
+</mapper>
