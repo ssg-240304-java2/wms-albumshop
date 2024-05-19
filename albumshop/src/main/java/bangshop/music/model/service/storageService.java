@@ -29,11 +29,12 @@ public class storageService {
 
         // 1. 사용자가 요청한 앨범 번호가 앨범에 있는지 체크 -> 잘못된 번호입니다! 에러던지기
         if(!mapper.isExistAlbum(request.getAlbumNo())){
+            System.out.println("잘못된 앨범 번호입니다! ");
             throw new RuntimeException("No Album");
+
         }
 
         // 2. 해당 스토리지에 앨범 기록 체크
-        System.out.println(mapper.isExistAlbumInStorage(request.getAlbumNo())); //false
         if (mapper.isExistAlbumInStorage(request.getAlbumNo())) {
             int result = mapper.updateAlbumStorage(request.getAlbumNo(), request.getQuantity());
             if (result > 0 ) {
@@ -49,7 +50,7 @@ public class storageService {
             int result = mapper.insertAlbumStorage(request.getAlbumNo(), request.getQuantity());
             if (result > 0 ) {
                 String message = printsResult.printSuccessMessage("insertAlbumStorage");
-                System.out.println("message = " + message);;
+                System.out.println("message = " + message);
                 sqlSession.commit();
             } else {
                 String message =  printsResult.printErrorMessage("insertAlbumStorage");
