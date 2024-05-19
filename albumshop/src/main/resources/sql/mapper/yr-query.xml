@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-</properties>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.StockOutMapper">
+
+    <resultMap id="stockOutResultMap" type="StockOutAndStorageDTO">
+        <id property="stockOutNo" column="stock_out_no"/>
+        <result property="stockOutDate" column="stock_out_date"/>
+        <result property="status" column="status" javaType="StockOutStatus"/>
+        <association property="storage" resultMap="storageResultMap"/>
+        <association property="order" resultMap="orderResultMap"/>
+    </resultMap>
+
+    <resultMap id="storageResultMap" type="StorageDTO">
+        <id property="storageNo" column="storage_no"/>
+        <result property="type" column="type"/>
+        <result property="storageCode" column="storage_code"/>
+    </resultMap>
+
+    <resultMap id="orderResultMap" type="OrderDTO">
+        <id property="orderNo" column="order_no"/>
+        <result property="albumNo" column="album_no"/>
+        <result property="quantity" column="quantity"/>
+        <association property="store" resultMap="storeResultMap"/>
+    </resultMap>
+
+    <resultMap id="storeResultMap" type="StoreDTO">
+        <id property="storeNo" column="store_no"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storeAddress" column="store_address"/>
+        <result property="employeeNo" column="employee_no"/>
+    </resultMap>
+
+    <select id="findStockOuts" resultMap="stockOutResultMap">
+        select
+        so.stock_out_no,
+        so.order_no,
+        o.album_no,
+        o.quantity,
+        so.status,
+        so.stock_out_date,
+        o.store_no,
+        s.storage_no
+        from stock_out so
+        left join orders o on so.order_no = o.order_no
+        left join storage s on so.storage_no = s.storage_no
+    </select>
+</mapper>

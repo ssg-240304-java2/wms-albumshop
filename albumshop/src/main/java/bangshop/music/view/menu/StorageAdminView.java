@@ -6,8 +6,10 @@ import bangshop.music.controller.EmployeeController;
 import java.util.Map;
 
 import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
+import bangshop.music.controller.DispatchController;
 
 public class StorageAdminView {
+    private final DispatchController dispatchController = new DispatchController();
 
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
@@ -22,8 +24,8 @@ public class StorageAdminView {
 //                case ORDERS ->//TODO: 주문 내역 조회
 //                case STOCK_IN ->//TODO: 앨범 입고
 //                case STOCK_IN_LIST ->//TODO: 앨범 입고 내역 조회
-//                case STOCK_OUT -> //TODO: 앨범 출고
-//                case STOCK_OUT_LIST ->//TODO: 앨범 출고 내역 조회
+//                case STOCK_OUT -> dispatchController.updateStockOut();
+                case STOCK_OUT_LIST -> dispatchController.findStockOuts();
                 case CREATE_ACCOUNT -> employeeController.signUp(inputEmployeeInfo());
                 case LOG_OUT -> {
                     return;

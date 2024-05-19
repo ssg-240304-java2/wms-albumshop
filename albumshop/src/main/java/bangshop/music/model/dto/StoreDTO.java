@@ -13,6 +13,7 @@ public class StoreDTO {
     int employeeNo;
     int storageNo;
     String name;
+    private StorageDTO storage;
 
     @Override
     public String toString() {
