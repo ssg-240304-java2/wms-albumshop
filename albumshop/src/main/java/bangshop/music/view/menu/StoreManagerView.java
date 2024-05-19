@@ -1,6 +1,7 @@
 package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
+import bangshop.music.controller.OrderStorageController;
 
 public class StoreManagerView {
     public void storeManagerMenu() {
@@ -12,7 +13,7 @@ public class StoreManagerView {
             switch (menu) {
 //                case SEARCH_ALBUM ->//TODO: 앨범 검색 및 조회
 //                case ORDERS ->//TODO: 앨범 주문
-//                case STOCK_INFO ->//TODO: 앨범 재고 조회
+                case STOCK_INFO -> OrderStorageController.findStoreStorage("1");//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
