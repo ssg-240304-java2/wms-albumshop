@@ -2,18 +2,30 @@ package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.OrderStorageController;
+import bangshop.music.model.dto.EmployeeDTO;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+import java.util.Map;
 
 public class StoreManagerView {
+
+    @Getter
+    @Setter
+    private static EmployeeDTO loggedInEmployee;
+
     public void storeManagerMenu() {
         while (true) {
             displayMenu();
+            EmployeeDTO emp = new EmployeeDTO();
             String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
             StoreManagerMenu menu = StoreManagerMenu.from(inputMenu);
 
             switch (menu) {
 //                case SEARCH_ALBUM ->//TODO: 앨범 검색 및 조회
 //                case ORDERS ->//TODO: 앨범 주문
-                case STOCK_INFO -> OrderStorageController.findStoreStorage("1");//TODO: 앨범 재고 조회
+                //case STOCK_INFO -> OrderStorageController.findStoreStorage(loggedInEmployee);//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
@@ -26,6 +38,18 @@ public class StoreManagerView {
         System.out.println("==========점장메뉴 메뉴==========");
         for (StoreManagerMenu menu : StoreManagerMenu.values()) {
             System.out.println(menu.getCode() + ". " + menu.getTitle());
+        }
+    }
+
+    public static void displayStorage(List<Map<String, Object>> storage) {
+        if (storage != null && !storage.isEmpty()) {
+            for (Map<String, Object> album : storage) {
+                System.out.println("Album Name: " + album.get("album_name"));
+                System.out.println("Stock: " + album.get("stock"));
+                System.out.println("---------------------------------");
+            }
+        } else {
+            System.out.println("No storage information available.");
         }
     }
 }
