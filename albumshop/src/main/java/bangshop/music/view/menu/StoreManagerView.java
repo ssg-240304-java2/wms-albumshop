@@ -17,6 +17,7 @@ public class StoreManagerView {
 //                case ORDERS ->//TODO: 앨범 주문
 //                case STOCK_INFO ->//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
+                    System.out.println();
                     return;
                 }
             }
