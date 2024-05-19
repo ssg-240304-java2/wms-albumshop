@@ -21,6 +21,5 @@
 
     <select id="selectEmployeeByName" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
         select employee_no, name, id, password, role_no, role_name from employee join role using(role_no) where name like CONCAT('%', #{name}, '%')
-<!--        select employee_no, name, id, password, role_no, role_name from employee join role using(role_no) join storage using(storage_no)  where name like CONCAT('%', #{name}, '%')-->
     </select>
 </mapper>
