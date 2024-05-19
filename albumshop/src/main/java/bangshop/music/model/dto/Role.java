@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum Role {
-    STORAGE_ADMIN(1, "공장관리자"),
+    STORAGE_ADMIN(1, "관리자"),
     STORE_MANAGER(2, "점장");
 
     private final int roleNo;

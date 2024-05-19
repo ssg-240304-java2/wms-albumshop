@@ -14,4 +14,12 @@
     <select id="findEmployeeById" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
         select * from employee where id=#{id}
     </select>
+
+    <select id="selectStoreByKeyword" parameterType="String" resultType="bangshop.music.model.dto.StoreDTO">
+        select store_no, store_name, store_address, name from store join employee using(employee_no) where store_name like CONCAT('%', #{keyword}, '%') or store_address like CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="selectEmployeeByName" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
+        select employee_no, name, id, password, role_no, role_name from employee join role using(role_no) where name like CONCAT('%', #{name}, '%')
+    </select>
 </mapper>
