@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface dao {
     List<AlbumDTO> storeStoragefindAll();
+    List<AlbumDTO> findAlbumByArtist(String artist);
 }

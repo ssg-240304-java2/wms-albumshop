@@ -22,10 +22,13 @@
         </environment>
     </environments>
     <mappers>
+
+      
         <mapper resource="sql/mapper/cy-query.xml"/>
-<!--        <mapper resource="sql/mapper/db-query.xml"/>-->
-<!--        <mapper resource="sql/mapper/jh-query.xml"/>-->
-<!--        <mapper resource="sql/mapper/sc-query.xml"/>-->
-<!--        <mapper resource="sql/mapper/yr-query.xml"/>-->
+       <mapper resource="sql/mapper/db-query.xml"/>
+       <mapper resource="sql/mapper/jh-query.xml"/>
+       <mapper resource="sql/mapper/sc-query.xml"/>
+       <mapper resource="sql/mapper/yr-query.xml"/>
+
     </mappers>
 </configuration>
