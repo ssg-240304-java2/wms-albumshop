@@ -37,19 +37,23 @@ public class storageService {
         if (mapper.isExistAlbumInStorage(request.getAlbumNo())) {
             int result = mapper.updateAlbumStorage(request.getAlbumNo(), request.getQuantity());
             if (result > 0 ) {
-                printsResult.printSuccessMessage("updateAlbumStorage");
+                String message = printsResult.printSuccessMessage("updateAlbumStorage");
+                System.out.println("message = " + message);
                 sqlSession.commit();
             } else {
-                printsResult.printErrorMessage("updateAlbumStorage");
+                String message = printsResult.printErrorMessage("updateAlbumStorage");
+                System.out.println("message = " + message);
                 sqlSession.rollback();
             }
         } else {
             int result = mapper.insertAlbumStorage(request.getAlbumNo(), request.getQuantity());
             if (result > 0 ) {
-                printsResult.printSuccessMessage("insertAlbumStorage");
+                String message = printsResult.printSuccessMessage("insertAlbumStorage");
+                System.out.println("message = " + message);;
                 sqlSession.commit();
             } else {
-                printsResult.printErrorMessage("insertAlbumStorage");
+                String message =  printsResult.printErrorMessage("insertAlbumStorage");
+                System.out.println("message = " + message);
                 sqlSession.rollback();
             }
 
@@ -58,10 +62,12 @@ public class storageService {
         // 3. 입고를 넣어준다.
         int result = mapper.createStock(request.getAlbumNo(), request.getQuantity());
         if (result > 0) {
-            printsResult.printSuccessMessage("insertStockIn");
+            String message =  printsResult.printSuccessMessage("insertStockIn");
+            System.out.println("message = " + message);
             sqlSession.commit();
         } else {
-            printsResult.printErrorMessage("insertStockIn");
+            String message = printsResult.printErrorMessage("insertStockIn");
+            System.out.println("message = " + message);
             sqlSession.rollback();
         }
 

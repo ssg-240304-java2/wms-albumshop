@@ -17,7 +17,7 @@ public class PrintsResult {
         System.out.println(album);
     }
 
-    public void printErrorMessage(String errorCode){
+    public String printErrorMessage(String errorCode){
 
         String errorMessage = "";
         switch (errorCode) {
@@ -31,11 +31,11 @@ public class PrintsResult {
             case "insertStockIn" : errorMessage = "입고내역 업데이트에 실패하였습니다.(insert)"; break;
 
         }
+        return errorMessage;
 
-        System.out.println(errorMessage);
     }
 
-    public void printSuccessMessage(String successcode) {
+    public String printSuccessMessage(String successcode) {
 
         String successMessage = "";
         switch (successcode) {
@@ -48,5 +48,6 @@ public class PrintsResult {
 
 
         }
+        return successMessage;
     }
 }
