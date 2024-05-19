@@ -7,7 +7,9 @@
     <resultMap id="albumResultMap" type="bangshop.music.model.dto.AlbumStorageDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
         <id property="albumNo" column="album_no"/>
     </resultMap>
-
+    <resultMap id="stockResultMap" type="bangshop.music.model.dto.StockInDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
+        <id property="stockInNo" column="stock_in_no"/>
+    </resultMap>
     <select id="insertAlbumStorage" parameterType="bangshop.music.model.dto.stock.InsertStockRequest" resultMap="albumResultMap">
         INSERT INTO album_storage(stock, album_no,storage_no)
         VALUES (#{quantity}, #{albumNo}, 1)
@@ -38,5 +40,9 @@
         INSERT INTO stock_in(quantity, stock_in_date , storage_admin_no ,album_no, storage_no)
         VALUES (#{quantity}, now() , 1 , #{albumNo}, 1 );
     </insert>
+    <select id="getStockList" parameterType="bangshop.music.model.dto.StockInDTO" resultMap="stockResultMap">
+        select *
+        from stock_in;
+    </select>
 </mapper>
 
