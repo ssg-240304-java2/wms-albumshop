@@ -12,7 +12,7 @@ public interface Mapper {
     Integer insertAlbumStorage(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     Integer updateAlbumStorage(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     Integer createStock(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
-    List<StockInDTO> getStockList(GetStockRequest request);
+    List<StockInDTO> getStockList(StockInDTO request);
 }
 
 

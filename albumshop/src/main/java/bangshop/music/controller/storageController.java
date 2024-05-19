@@ -24,10 +24,11 @@ public class storageController {
     }
 
     // 입고내역 조회
-    public List<StockInDTO> getStockList(GetStockRequest request) {
+    // 입고내역 조회
+    public List<StockInDTO> getStockList(StockInDTO request) {
+        System.out.println(request);
         return service.getStockList(request);
     }
-
     public void findStoreStorage() {
     }
 }

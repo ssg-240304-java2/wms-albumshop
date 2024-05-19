@@ -20,15 +20,7 @@ public class storageService {
         printsResult = new PrintsResult();
     }
 
-    public List<StockInDTO> getStockList(GetStockRequest request) {
-        SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(Mapper.class);
 
-        List<StockInDTO> result = mapper.getStockList(request);
-        sqlSession.close();
-
-        return result;
-    }
 
     public void insertStock(InsertStockRequest request) {
 
@@ -74,5 +66,25 @@ public class storageService {
         }
 
         sqlSession.close();
+    }
+
+    //입고내역 조회
+    public List<StockInDTO> getStockList(StockInDTO request) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(Mapper.class);
+
+        List<StockInDTO> result = mapper.getStockList(request);
+
+        if(result != null && result.size() > 0) {
+            for(StockInDTO stockIn : result){
+                System.out.println(stockIn);
+            }
+        } else {
+            System.out.println("조회결과가 존재하지 않습니다.");
+        }
+
+        sqlSession.close();
+
+        return result;
     }
 }
