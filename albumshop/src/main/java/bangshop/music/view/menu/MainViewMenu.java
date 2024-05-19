@@ -9,8 +9,7 @@ import java.util.Arrays;
 @Getter
 public enum MainViewMenu {
     SIGN_IN("1", "로그인"),
-    SIGN_UP("2", "회원가입"),
-    EXIT("3", "프로그램 종료");
+    EXIT("2", "프로그램 종료");
 
     private final String code;
     private final String title;

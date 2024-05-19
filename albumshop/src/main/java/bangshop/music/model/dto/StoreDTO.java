@@ -1,16 +1,24 @@
 package bangshop.music.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoreDTO {
-    private int storeNo;
-    private String storeName;
-    private String storeAddress;
-    private int employeeNo;
+    int storeNo;
+    String storeName;
+    String storeAddress;
+    int employeeNo;
+    int storageNo;
+    String name;
     private StorageDTO storage;
+
+    @Override
+    public String toString() {
+        return  "지점명: " + storeName + ", " +
+                "주소: " + storeAddress + ", " +
+                "점장명: " + name;
+    }
 }
