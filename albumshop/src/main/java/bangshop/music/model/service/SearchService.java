@@ -30,4 +30,13 @@ public class SearchService {
         return albumList;
     }
 
+    public List<AlbumDTO> searchAlbumByNo(String albumNo) {
+        SqlSession sqlSession = getSqlSession();
+        SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
+
+        List<AlbumDTO> albumList = searchMapper.searchAlbumByNo(albumNo);
+
+        sqlSession.close();
+        return albumList;
+    }
 }
