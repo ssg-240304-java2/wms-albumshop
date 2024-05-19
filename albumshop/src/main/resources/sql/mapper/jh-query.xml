@@ -3,28 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.OrderStorageMapper">
-    <!-- 직원의 창고 번호 가져오기 -->
-    <select id="getStorageNoByEmployeeNo" parameterType="int" resultType="int">
-        SELECT sa.storage_no
-        FROM storage_admin sa
-        WHERE sa.employee_no = #{employee_no}
-    </select>
-
     <!-- 창고의 앨범 재고 조회 -->
     <select id="getAlbumStockByStorageNo" parameterType="int" resultType="map">
         SELECT
         a.album_no,
         a.album_name,
+        e.name,
         a.singer,
         a.release_date,
         a.price,
         ast.stock
         FROM
-        album a
-        JOIN
-        album_storage ast ON a.album_no = ast.album_no
+        store s
+        LEFT JOIN album_storage ast ON s.store_no = ast.storage_no
+        LEFT JOIN album a ON ast.album_no = a.album_no
+        LEFT JOIN employee e ON s.employee_no = e.employee_no
         WHERE
-        ast.storage_no = #{storage_no}
+        e.employee_no = #{employeeNo};
     </select>
 
     <select id="findOrder" resultType="bangshop.music.model.dto.OrderDTO">

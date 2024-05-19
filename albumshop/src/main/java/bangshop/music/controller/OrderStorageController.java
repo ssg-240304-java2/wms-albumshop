@@ -39,10 +39,15 @@ public class OrderStorageController {
             ErrorView.displayError(ErrorCode.STOCK_ERROR);
         }
     }
-    public static void findStoreStorage(EmployeeDTO employee) {
+    public static void findStoreAlbumStock() {
         try {
-            List<Map<String, Object>> storage = OrderStorageService.findStoreStorage(employee);
-            StoreManagerView.displayStorage(storage);
+            EmployeeDTO loggedInEmployee = StoreManagerView.getLoggedInEmployee();
+            if (loggedInEmployee == null) {
+                System.out.println("로그인된 점장 정보가 없습니다.");
+                return;
+            }
+            List<Map<String, Object>> storeStock = OrderStorageService.findStoreAlbumStock(loggedInEmployee);
+            StoreManagerView.displayStoreAlbumStock(storeStock);
         } catch (Exception e) {
             e.printStackTrace();
             ErrorView.displayError(ErrorCode.STOCK_ERROR);

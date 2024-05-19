@@ -25,7 +25,7 @@ public class StoreManagerView {
             switch (menu) {
 //                case SEARCH_ALBUM ->//TODO: 앨범 검색 및 조회
 //                case ORDERS ->//TODO: 앨범 주문
-                //case STOCK_INFO -> OrderStorageController.findStoreStorage(loggedInEmployee);//TODO: 앨범 재고 조회
+                case STOCK_INFO -> OrderStorageController.findStoreAlbumStock();//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
@@ -41,15 +41,20 @@ public class StoreManagerView {
         }
     }
 
-    public static void displayStorage(List<Map<String, Object>> storage) {
-        if (storage != null && !storage.isEmpty()) {
-            for (Map<String, Object> album : storage) {
+    public static void displayStoreAlbumStock(List<Map<String, Object>> storeStock) {
+        if (storeStock != null && !storeStock.isEmpty()) {
+            for (Map<String, Object> album : storeStock) {
+                System.out.println("Album No: " + album.get("album_no"));
                 System.out.println("Album Name: " + album.get("album_name"));
+                System.out.println("Employee Name: " + album.get("name"));
+                System.out.println("Singer: " + album.get("singer"));
+                System.out.println("Release Date: " + album.get("release_date"));
+                System.out.println("Price: " + album.get("price"));
                 System.out.println("Stock: " + album.get("stock"));
                 System.out.println("---------------------------------");
             }
         } else {
-            System.out.println("No storage information available.");
+            System.out.println("No stock information available.");
         }
     }
 }
