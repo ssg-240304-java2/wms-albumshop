@@ -12,4 +12,6 @@ public class OrderDTO {
     private String orderDate;
     private Integer quantity;
     private Integer totalPrice;
+    private String albumNo;
+    private StoreDTO store;
 }
