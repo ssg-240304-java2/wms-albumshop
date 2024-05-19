@@ -13,7 +13,18 @@ public class SearchService {
     public List<AlbumDTO> searchAlbumByTitle(String title) {
         SqlSession sqlSession = getSqlSession();
         SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
+
         List<AlbumDTO> albumList = searchMapper.searchAlbumByTitle(title);
+
+        sqlSession.close();
+        return albumList;
+    }
+    public List<AlbumDTO> searchAlbumBySinger(String singer) {
+        SqlSession sqlSession = getSqlSession();
+        SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
+
+        List<AlbumDTO> albumList = searchMapper.searchAlbumByTitle(singer);
+
         sqlSession.close();
         return albumList;
     }
