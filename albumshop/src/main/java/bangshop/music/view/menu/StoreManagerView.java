@@ -7,7 +7,7 @@ public class StoreManagerView {
         while (true) {
             displayMenu();
             String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
-            StorageAdminMenu menu = StorageAdminMenu.from(inputMenu);
+            StoreManagerMenu menu = StoreManagerMenu.from(inputMenu);
 
             switch (menu) {
 //                case SEARCH_ALBUM ->//TODO: 앨범 검색 및 조회
