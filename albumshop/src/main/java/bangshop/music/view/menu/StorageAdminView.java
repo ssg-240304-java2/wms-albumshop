@@ -26,8 +26,11 @@ public class StorageAdminView {
 //                case STOCK_IN_LIST ->//TODO: 앨범 입고 내역 조회
 //                case STOCK_OUT -> dispatchController.updateStockOut();
                 case STOCK_OUT_LIST -> dispatchController.findStockOuts();
-                case CREATE_ACCOUNT -> employeeController.signUp(inputEmployeeInfo());
+                case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
+                case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
+                case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
                 case LOG_OUT -> {
+                    System.out.println();
                     return;
                 }
             }
@@ -46,9 +49,17 @@ public class StorageAdminView {
     }
 
     private Map<String, String> inputEmployeeInfo() {
-        String name = IOUtils.input("이름: ");
+        String name = IOUtils.input("이름을 입력하세요: ");
         Map<String, String> parameter = inputAccountInfo();
         parameter.put("name", name);
         return parameter;
+    }
+
+    private String inputKeyword() {
+        return IOUtils.input("키워드를 입력하세요: ");
+    }
+
+    private String inputEmployeeName() {
+        return IOUtils.input("직원명을 입력하세요: ");
     }
 }

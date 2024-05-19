@@ -15,7 +15,9 @@ public enum StorageAdminMenu {
     STOCK_OUT("5", "앨범 출고"),
     STOCK_OUT_LIST("6", "앨범 출고 내역 조회"),
     CREATE_ACCOUNT("7", "계정 생성"),
-    LOG_OUT("8","로그아웃"),
+    SEARCH_STORE("8", "지점 검색"),
+    SEARCH_EMPLOYEE("9", "직원 검색"),
+    LOG_OUT("10","로그아웃"),
     ;
 
     private final String code;

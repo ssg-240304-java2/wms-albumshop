@@ -20,6 +20,8 @@ public class MainMenu {
             displayMenu();
             String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
             MainViewMenu menu = MainViewMenu.from(inputMenu);
+            System.out.println();
+
             switch (menu) {
                 case SIGN_IN -> employeeController.signIn(inputAccountInfo());
                 case EXIT -> exit();
@@ -35,8 +37,8 @@ public class MainMenu {
     }
 
     public static Map<String, String> inputAccountInfo() {
-        String id = IOUtils.input("아이디: ");
-        String password = IOUtils.input("비밀번호: ");
+        String id = IOUtils.input("아이디를 입력하세요: ");
+        String password = IOUtils.input("비밀번호를 입력하세요: ");
         Map<String, String> parameter = new HashMap<>();
         parameter.put("id", id);
         parameter.put("password", password);

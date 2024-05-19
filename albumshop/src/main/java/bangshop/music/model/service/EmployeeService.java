@@ -2,7 +2,10 @@ package bangshop.music.model.service;
 
 import bangshop.music.model.dao.EmployeeMapper;
 import bangshop.music.model.dto.EmployeeDTO;
+import bangshop.music.model.dto.StoreDTO;
 import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
@@ -24,6 +27,24 @@ public class EmployeeService {
             int result = employeeMapper.insertEmployee(employee);
             sqlSession.commit();
             return result > 0;
+        }
+    }
+
+    public List<StoreDTO> findStoreByKeyword(String keyword) {
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            List<StoreDTO> storeList = employeeMapper.selectStoreByKeyword(keyword);
+            sqlSession.commit();
+            return storeList;
+        }
+    }
+
+    public List<EmployeeDTO> findEmployeeByName(String name) {
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            List<EmployeeDTO> employeeList = employeeMapper.selectEmployeeByName(name);
+            sqlSession.commit();
+            return employeeList;
         }
     }
 }
