@@ -24,6 +24,10 @@ public class StorageAdminView {
         }
     }
 
+    public static void main(String[] args) {
+        displayMenu();
+    }
+
     private static void displayMenu() {
         System.out.println("==========창고관리자 메뉴==========");
         for (StorageAdminMenu menu : StorageAdminMenu.values()) {
