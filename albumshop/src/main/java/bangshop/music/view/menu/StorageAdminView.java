@@ -5,11 +5,9 @@ import bangshop.music.common.utils.IOUtils;
 
 import bangshop.music.controller.storageController;
 import bangshop.music.model.dto.StockInDTO;
-import bangshop.music.model.dto.stock.GetStockRequest;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.util.Scanner;
-
 import bangshop.music.controller.EmployeeController;
 
 import java.util.Map;
@@ -37,10 +35,6 @@ public class StorageAdminView {
 //                case ORDERS ->//TODO: 주문 내역 조회
                 case STOCK_IN ->  storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
                 case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
-//                case STOCK_OUT_LIST ->//TODO: 앨범 출고 내역 조회
-=======
-//                case STOCK_IN ->//TODO: 앨범 입고
-//                case STOCK_IN_LIST ->//TODO: 앨범 입고 내역 조회
 //                case STOCK_OUT -> dispatchController.updateStockOut();
                 case STOCK_OUT_LIST -> dispatchController.findStockOuts();
                 case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
