@@ -11,7 +11,7 @@ public interface Mapper {
     boolean isExistAlbumInStorage(String albumNo);
     Integer insertAlbumStorage(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     Integer updateAlbumStorage(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
-    Long createStock(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
+    Integer createStock(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     List<StockInDTO> getStockList(GetStockRequest request);
 }
 

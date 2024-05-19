@@ -55,15 +55,24 @@ public class storageService {
             int result = mapper.insertAlbumStorage(request.getAlbumNo(), request.getQuantity());
             if (result > 0 ) {
                 printsResult.printSuccessMessage("insertAlbumStorage");
+                sqlSession.commit();
             } else {
                 printsResult.printErrorMessage("insertAlbumStorage");
+                sqlSession.rollback();
             }
 
         }
 
         // 3. 입고를 넣어준다.
-        mapper.createStock(request.getAlbumNo(), request.getQuantity());
-        System.out.println("mapper = " + mapper);
+        int result = mapper.createStock(request.getAlbumNo(), request.getQuantity());
+        if (result > 0) {
+            printsResult.printSuccessMessage("insertStockIn");
+            sqlSession.commit();
+        } else {
+            printsResult.printErrorMessage("insertStockIn");
+            sqlSession.rollback();
+        }
+
         sqlSession.close();
     }
 }
