@@ -6,9 +6,8 @@
     <!-- 창고의 앨범 재고 조회 -->
     <select id="getAlbumStockByStorageNo" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
         SELECT
-        album_storage.album_no AS albumNo,
+        a.album_name,
         album_storage.stock AS stock,
-        e.employee_no AS employeeNo,
         s.store_name
         FROM
         album_storage
@@ -16,12 +15,16 @@
         employee e ON album_storage.employee_no = e.employee_no
         LEFT JOIN
         store s ON album_storage.employee_no = s.employee_no
+        Left JOIN
+        album a on album_storage.album_no = a.album_no
         WHERE
         e.employee_no = #{number}
     </select>
 
     <select id="findOrder" resultType="bangshop.music.model.dto.OrderDTO">
-        select order_no, order_date, quantity, total_price, store_no, album_no from orders
+        select order_no, order_date, s.store_name,a.album_name, quantity, total_price from orders
+        left join album a on orders.album_no = a.album_no
+        left join store s on orders.store_no = s.store_no;
     </select>
 
     <select id="findStorageStock" parameterType="String" resultType="bangshop.music.model.dto.AlbumStorageDTO">

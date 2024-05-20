@@ -4,7 +4,7 @@ import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.DispatchController;
 import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
-import bangshop.music.controller.StorageController;
+//import bangshop.music.controller.StorageController;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.AlbumStorageDTO;
@@ -21,7 +21,7 @@ import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
-    private final StorageController storageController = new StorageController();
+    //private final StorageController storageController = new StorageController();
 
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
@@ -37,8 +37,8 @@ public class StorageAdminView {
                     case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
                     case ORDERS -> OrderStorageController.findOrder();
-                    case STOCK_IN -> storageController.insertStock(inStockAlbum());
-                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
+                    //case STOCK_IN -> storageController.insertStock(inStockAlbum());
+                    //case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
                         dispatchController.dispatch();
@@ -114,7 +114,7 @@ public class StorageAdminView {
             System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
         }
         else {
-            System.out.println("----------------------------");
+            System.out.println("-------------앨범별 재고목록-------------");
             for(AlbumStorageDTO storage : stock) {
                 System.out.println(storage);
             }
@@ -127,7 +127,7 @@ public class StorageAdminView {
             System.out.println("> 😅😅😅 조회된 주문이 없습니다. 😅😅😅");
         }
         else {
-            System.out.println("----------------------------");
+            System.out.println("-----------주문서-----------");
             for(OrderDTO order : orders) {
                 System.out.println(order);
             }
