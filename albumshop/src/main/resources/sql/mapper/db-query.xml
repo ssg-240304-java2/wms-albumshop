@@ -10,10 +10,10 @@
     <resultMap id="stockResultMap" type="bangshop.music.model.dto.StockInDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
         <id property="stockInNo" column="stock_in_no"/>
     </resultMap>
-    <select id="insertAlbumStorage" parameterType="bangshop.music.model.dto.stock.InsertStockRequest" resultMap="albumResultMap">
+    <insert id="insertAlbumStorage" parameterType="bangshop.music.model.dto.stock.InsertStockRequest">
         INSERT INTO album_storage(stock, album_no,storage_no)
         VALUES (#{quantity}, #{albumNo}, 1)
-    </select>
+    </insert>
 
     <select id="isExistAlbumInStorage" parameterType="String" resultType="boolean">
         SELECT EXISTS (

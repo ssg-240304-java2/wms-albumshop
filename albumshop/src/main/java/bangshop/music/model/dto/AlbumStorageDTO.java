@@ -13,4 +13,10 @@ public class AlbumStorageDTO {
     private String albumNo;
     private Integer storageNo;
     private Integer employee_no;
+    public void stockDecrease(int quantity) {
+        if (this.stock - quantity < 0) {
+            throw new IllegalStateException("재고가 부족합니다.");
+        }
+        this.stock -= quantity;
+    }
 }

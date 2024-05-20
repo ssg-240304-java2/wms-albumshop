@@ -7,8 +7,8 @@ import bangshop.music.controller.OrderStorageController;
 import bangshop.music.controller.storageController;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
+import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.StockInDTO;
-import bangshop.music.model.dto.stock.GetStockRequest;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.util.List;
@@ -31,26 +31,36 @@ public class StorageAdminView {
         EmployeeController employeeController = new EmployeeController();
 
         while (true) {
-            displayMenu();
-            String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
-            StorageAdminMenu menu = StorageAdminMenu.from(inputMenu);
+            try {
+                displayMenu();
+                String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
+                StorageAdminMenu menu = StorageAdminMenu.from(inputMenu);
 
-            storageController storageController = new storageController();
+                storageController storageController = new storageController();
 
-            switch (menu) {
-                case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");//TODO: 앨범 재고 확인
-                case ORDERS -> OrderStorageController.findOrder(); //주문 내역 조회
-                case STOCK_IN ->  storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
-                case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
-//                case STOCK_OUT -> dispatchController.updateStockOut();
-                case STOCK_OUT_LIST -> dispatchController.findStockOuts();
-                case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
-                case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
-                case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
-                case LOG_OUT -> {
-                    System.out.println();
-                    return;
+
+                System.out.println("===============================");
+                switch (menu) {
+                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");//TODO: 앨범 재고 확인
+                    case ORDERS -> OrderStorageController.findOrder(); //주문 내역 조회
+                    case STOCK_IN ->
+                            storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
+                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
+                    case STOCK_OUT -> {
+                        dispatchController.findStockOuts(StockOutStatus.WAITING);
+                        dispatchController.dispatch();
+                    }
+                    case STOCK_OUT_LIST -> dispatchController.findStockOuts(StockOutStatus.COMPLETE);
+                    case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
+                    case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
+                    case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
+                    case LOG_OUT -> {
+                        System.out.println();
+                        return;
+                    }
                 }
+            } catch(Exception e){
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -69,7 +79,7 @@ public class StorageAdminView {
 
             System.out.print("입고할 수량을 입력하세요 : ");
             int quantity = sc.nextInt();
-            stock  =  new InsertStockRequest(albumNo, quantity);
+            stock = new InsertStockRequest(albumNo, quantity);
         } catch (Exception e) {
             System.out.println("잘못된 입력입니다. 다시 시도해 주세요.");
             sc.nextLine();

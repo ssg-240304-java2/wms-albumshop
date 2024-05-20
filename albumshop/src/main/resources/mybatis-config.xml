@@ -8,7 +8,8 @@
     </settings>
     <typeAliases>
         <!-- 지정한 패키지 하위의 모든 클래스를 소문자로 시작하는 별칭으로 등록-->
-        <package name="bangshop.music"/>
+        <package name="bangshop.music.model.dto"/>
+        <package name="bangshop.music.model.domain"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -26,6 +27,8 @@
         <mapper resource="sql/mapper/db-query.xml"/>
         <mapper resource="sql/mapper/jh-query.xml"/>
 <!--        <mapper resource="sql/mapper/sc-query.xml"/>-->
-<!--        <mapper resource="sql/mapper/yr-query.xml"/>-->
+        <mapper resource="sql/mapper/yr-query.xml"/>
+        <mapper resource="sql/mapper/order-mapper.xml"/>
+        <mapper resource="sql/mapper/album-storage-mapper.xml"/>
     </mappers>
 </configuration>

@@ -1,6 +1,6 @@
 package bangshop.music.model.dto;
 
-import bangshop.music.model.StockOutStatus;
+import bangshop.music.model.domain.StockOutStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
