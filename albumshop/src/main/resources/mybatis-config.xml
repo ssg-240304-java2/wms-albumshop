@@ -28,6 +28,8 @@
         <mapper resource="sql/mapper/jh-query.xml"/>
         <mapper resource="sql/mapper/yr-query.xml"/>
         <mapper resource="sql/mapper/album-storage-mapper.xml"/>
+        <mapper resource="sql/mapper/order-mapper.xml"/>
+        <mapper resource="sql/mapper/storage-mapper.xml"/>
         <mapper resource="sql/mapper/sc-query.xml"/>
     </mappers>
 </configuration>

@@ -26,4 +26,23 @@
             storage_no = #{storageNo}
         where album_storage_no = #{albumStorageNo}
     </update>
+
+    <insert id="save" parameterType="albumStorageDTO">
+        insert into album_storage(
+            stock,
+            album_no,
+            storage_no,
+            employee_no,
+            store_name,
+            album_name
+        )
+        values (
+            #{stock},
+            #{albumNo},
+            #{storageNo},
+            #{employeeNo},
+            #{storeName},
+            #{albumName}
+        )
+    </insert>
 </mapper>
