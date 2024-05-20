@@ -62,7 +62,7 @@ public class StoreManagerView {
         if (storage == null || storage.isEmpty()) {
             System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
         } else {
-            System.out.println("----------------------------");
+            System.out.println("----------앨범별 재고목록------------");
             for (AlbumStorageDTO albumStorage : storage) {
                 System.out.println(albumStorage);
             }
