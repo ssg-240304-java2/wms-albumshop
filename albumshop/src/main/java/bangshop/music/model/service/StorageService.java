@@ -11,16 +11,12 @@ import java.util.List;
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
 public class StorageService {
-
     private Mapper mapper;
     private PrintsResult printsResult;
 
     public StorageService() {
         printsResult = new PrintsResult();
     }
-
-
-
 
     public void insertStock(InsertStockRequest request) {
 
@@ -92,7 +88,4 @@ public class StorageService {
 
         return result;
     }
-
-
-
 }
