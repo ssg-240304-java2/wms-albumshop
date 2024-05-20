@@ -102,7 +102,7 @@ public class StorageAdminView {
     }
 
     private String inputKeyword() {
-        return IOUtils.input("키워드를 입력하세요: ");
+        return IOUtils.input("지점명 또는 주소를 입력하세요: ");
     }
 
     private String inputEmployeeName() {
