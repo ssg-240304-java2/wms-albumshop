@@ -1,6 +1,8 @@
 package bangshop.music.model.service;
 
+import bangshop.music.common.utils.IOUtils;
 import bangshop.music.model.dao.Mapper;
+import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 import bangshop.music.view.PrintsResult;
@@ -87,5 +89,29 @@ public class StorageService {
         sqlSession.close();
 
         return result;
+    }
+
+    //앨범 등록
+    public void insertAlbum(AlbumDTO request) {
+
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(Mapper.class);
+
+        if (mapper.isExistAlbum(request.getAlbumNo())){
+            throw new IllegalArgumentException("해당 앨범이 이미 존재합니다. ");
+        } else {
+            int result = mapper.insertAlbum(request);
+
+            if(result > 0) {
+             printsResult.printSuccessMessage("insertAlbum") ;
+             sqlSession.commit();
+            } else  {
+                printsResult.printErrorMessage("insertAlbum");
+                sqlSession.rollback();
+            }
+        }
+
+        sqlSession.close();
+
     }
 }

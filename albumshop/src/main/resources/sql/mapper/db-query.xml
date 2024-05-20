@@ -44,5 +44,14 @@
         select *
         from stock_in;
     </select>
+    <insert id = "insertAlbum">
+        insert into album (
+        album_no,
+        album_name,
+        singer,
+        release_date,
+        price)
+        values (#{albumNo}, #{albumName}, #{singer}, #{releaseDate}, #{price} )
+    </insert>
 </mapper>
 
