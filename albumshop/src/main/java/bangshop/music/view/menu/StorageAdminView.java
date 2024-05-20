@@ -34,7 +34,7 @@ public class StorageAdminView {
 
                 System.out.println("===============================");
                 switch (menu) {
-                    case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
+//                    case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
                     case ORDERS -> OrderStorageController.findOrder();
                     //case STOCK_IN -> storageController.insertStock(inStockAlbum());
