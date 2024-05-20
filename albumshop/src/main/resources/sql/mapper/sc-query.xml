@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-</properties>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.SearchMapper">
+
+    <select id="searchAlbumByTitle" resultType="albumDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE album_name LIKE CONCAT('%', #{title}, '%')
+    </select>
+
+    <select id="searchAlbumBySinger" resultType="albumDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE singer LIKE CONCAT('%', #{singer}, '%')
+    </select>
+
+    <select id="searchAlbumByNo" resultType="albumDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE a.album_no=#{albumNo}
+    </select>
+    <select id="order" resultType="orderDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE a.album_no=#{albumNo}
+    </select>
+</mapper>
