@@ -21,12 +21,8 @@ public class StorageController {
         service.insertStock(request);
     }
 
-
-
     // 입고내역 조회
     public List<StockInDTO> getStockList(StockInDTO request) {
         return service.getStockList(request);
     }
-
-
 }

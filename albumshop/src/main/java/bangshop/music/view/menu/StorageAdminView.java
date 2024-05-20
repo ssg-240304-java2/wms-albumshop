@@ -1,32 +1,26 @@
 package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
-
-
+import bangshop.music.controller.DispatchController;
+import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
 import bangshop.music.controller.StorageController;
+import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
-import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
-import bangshop.music.controller.EmployeeController;
-
-import java.util.Map;
-
 import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
-
-import bangshop.music.controller.DispatchController;
-import bangshop.music.model.service.OrderStorageService;
-
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
     private final StorageController storageController = new StorageController();
+
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
 
@@ -36,15 +30,12 @@ public class StorageAdminView {
                 String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
                 StorageAdminMenu menu = StorageAdminMenu.from(inputMenu);
 
-                StorageController storageController = new StorageController();
-
-
                 System.out.println("===============================");
                 switch (menu) {
-                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");//TODO: 앨범 재고 확인
-                    case ORDERS -> OrderStorageController.findOrder(); //주문 내역 조회
-                    case STOCK_IN -> storageController.insertStock(inStockAlbum()); //TODO 다빈: 앨범 입고
-                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
+                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
+                    case ORDERS -> OrderStorageController.findOrder();
+                    case STOCK_IN -> storageController.insertStock(inStockAlbum());
+                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
                         dispatchController.dispatch();
@@ -62,10 +53,6 @@ public class StorageAdminView {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        displayMenu();
     }
 
     private InsertStockRequest inStockAlbum() {
