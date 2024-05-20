@@ -1,5 +1,6 @@
 package bangshop.music.model.dao;
 
+import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.GetStockRequest;
 import org.apache.ibatis.annotations.Param;
@@ -13,6 +14,7 @@ public interface Mapper {
     Integer updateAlbumStorage(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     Integer createStock(@Param("albumNo") String albumNo, @Param("quantity") Integer quantity);
     List<StockInDTO> getStockList(StockInDTO request);
+    Integer insertAlbum(AlbumDTO request);
 }
 
 

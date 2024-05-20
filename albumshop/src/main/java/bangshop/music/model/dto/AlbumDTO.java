@@ -15,11 +15,11 @@ public class AlbumDTO {
     private Date releaseDate;
     private int price;
 
-    public AlbumDTO(String albumNo, String albumName, String singer, Date releaseDate, double price) {
+    public AlbumDTO(String albumNo, String albumName, String singer, Date releaseDate, int price) {
         this.albumNo = albumNo;
         this.albumName = albumName;
         this.singer = singer;
         this.releaseDate = releaseDate;
-        this.price = (int) Math.round(price * 1.3) * 1000;
+        this.price = price;
     }
 }

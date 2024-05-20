@@ -1,5 +1,6 @@
 package bangshop.music.controller;
 
+import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 import bangshop.music.model.service.StorageService;
@@ -24,5 +25,9 @@ public class StorageController {
     // 입고내역 조회
     public List<StockInDTO> getStockList(StockInDTO request) {
         return service.getStockList(request);
+    }
+
+    public void insertAlbum(AlbumDTO request) {
+        service.insertAlbum(request);
     }
 }
