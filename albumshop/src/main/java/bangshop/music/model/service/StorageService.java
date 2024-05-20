@@ -2,7 +2,6 @@ package bangshop.music.model.service;
 
 import bangshop.music.model.dao.Mapper;
 import bangshop.music.model.dto.StockInDTO;
-import bangshop.music.model.dto.stock.GetStockRequest;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 import bangshop.music.view.PrintsResult;
 import org.apache.ibatis.session.SqlSession;
@@ -11,14 +10,15 @@ import java.util.List;
 
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
-public class storageService {
+public class StorageService {
 
     private Mapper mapper;
     private PrintsResult printsResult;
 
-    public storageService() {
+    public StorageService() {
         printsResult = new PrintsResult();
     }
+
 
 
 
@@ -29,9 +29,7 @@ public class storageService {
 
         // 1. 사용자가 요청한 앨범 번호가 앨범에 있는지 체크 -> 잘못된 번호입니다! 에러던지기
         if(!mapper.isExistAlbum(request.getAlbumNo())){
-            System.out.println("잘못된 앨범 번호입니다! ");
-            throw new RuntimeException("No Album");
-
+            throw new IllegalArgumentException("잘못된 앨범 번호입니다! ");
         }
 
         // 2. 해당 스토리지에 앨범 기록 체크
@@ -94,4 +92,7 @@ public class storageService {
 
         return result;
     }
+
+
+
 }
