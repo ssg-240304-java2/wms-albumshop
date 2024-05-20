@@ -39,9 +39,9 @@ public class StoreManagerView {
 
         String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
         switch (inputMenu) {
-//            case "1"->
+            case "1"-> searchController.searchAlbumBySinger();
             case "2" -> searchController.searchAlbumByTitle();
-//            case "3"->
+            case "3"-> searchController.searchAlbumByNo();
         }
 
     }

@@ -10,10 +10,21 @@
         join album a
         on a.album_no = als.album_no
         WHERE album_name LIKE CONCAT('%', #{title}, '%')
+    </select>
 
+    <select id="searchAlbumBySinger" resultType="albumDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE singer LIKE CONCAT('%', #{singer}, '%')
+    </select>
 
-<!--        SELECT *-->
-<!--        FROM album-->
-<!--        WHERE album_name LIKE CONCAT('%', #{title}, '%')-->
+    <select id="searchAlbumByNo" resultType="albumDTO">
+        SELECT a.album_no, singer, album_name, release_date, price
+        FROM album_storage als
+        join album a
+        on a.album_no = als.album_no
+        WHERE a.album_no=#{albumNo}
     </select>
 </mapper>
