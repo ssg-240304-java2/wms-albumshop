@@ -4,14 +4,14 @@ import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.DispatchController;
 import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
-//import bangshop.music.controller.StorageController;
 import bangshop.music.controller.StorageController;
 import bangshop.music.model.dao.AlbumMapper;
+import bangshop.music.controller.StorageController;
+
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
-import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.sql.Date;
@@ -104,7 +104,7 @@ public class StorageAdminView {
     }
 
     private String inputKeyword() {
-        return IOUtils.input("검색 키워드를 입력하세요: ");
+        return IOUtils.input("지점명 또는 주소를 입력하세요: ");
     }
 
     private String inputEmployeeName() {
@@ -112,10 +112,10 @@ public class StorageAdminView {
     }
 
     public static void displayStorage(List<AlbumStorageDTO> stock) {
-        if(stock == null) {
+        if(stock == null) { 
             System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
-        }
-        else {
+        }  
+        else {  
             System.out.println("-------------앨범별 재고목록-------------");
             for(AlbumStorageDTO storage : stock) {
                 System.out.println(storage);

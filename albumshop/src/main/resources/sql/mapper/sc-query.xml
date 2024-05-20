@@ -4,6 +4,29 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.SearchMapper">
 
+    <resultMap id="orderResultMap" type="orderDTO">
+        <id property="orderNo" column="order_no"/>
+        <result property="orderDate" column="order_date"/>
+        <result property="quantity" column="quantity"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="albumNo" column="album_no"/>
+        <association property="store" resultMap="storeResultMap"/>
+    </resultMap>
+
+    <resultMap id="storeResultMap" type="storeDTO">
+        <id property="storeNo" column="store_no"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storeAddress" column="store_address"/>
+        <result property="employeeNo" column="employee_no"/>
+        <result property="storageNo" column="storage_no"/>
+    </resultMap>
+
+    <select id="getById" resultMap="orderResultMap">
+        select *
+        from orders
+        where order_no = #{orderNo}
+    </select>
+
     <select id="searchAlbumByTitle" resultType="albumDTO">
         SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
