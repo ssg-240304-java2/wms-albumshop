@@ -2,6 +2,7 @@ package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.OrderStorageController;
+import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.EmployeeDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,17 +16,16 @@ public class StoreManagerView {
     @Setter
     private static EmployeeDTO loggedInEmployee;
 
-    public void storeManagerMenu() {
+    public void storeManagerMenu(EmployeeDTO emp) {
         while (true) {
             displayMenu();
-            EmployeeDTO emp = new EmployeeDTO();
             String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
             StoreManagerMenu menu = StoreManagerMenu.from(inputMenu);
 
             switch (menu) {
 //                case SEARCH_ALBUM ->//TODO: 앨범 검색 및 조회
 //                case ORDERS ->//TODO: 앨범 주문
-                case STOCK_INFO -> OrderStorageController.findStoreAlbumStock();//TODO: 앨범 재고 조회
+                case STOCK_INFO -> OrderStorageController.findstoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
@@ -41,20 +41,15 @@ public class StoreManagerView {
         }
     }
 
-    public static void displayStoreAlbumStock(List<Map<String, Object>> storeStock) {
-        if (storeStock != null && !storeStock.isEmpty()) {
-            for (Map<String, Object> album : storeStock) {
-                System.out.println("Album No: " + album.get("album_no"));
-                System.out.println("Album Name: " + album.get("album_name"));
-                System.out.println("Employee Name: " + album.get("name"));
-                System.out.println("Singer: " + album.get("singer"));
-                System.out.println("Release Date: " + album.get("release_date"));
-                System.out.println("Price: " + album.get("price"));
-                System.out.println("Stock: " + album.get("stock"));
-                System.out.println("---------------------------------");
-            }
+    public static void displayStorage(List<AlbumStorageDTO> storage) {
+        if (storage == null || storage.isEmpty()) {
+            System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
         } else {
-            System.out.println("No stock information available.");
+            System.out.println("----------------------------");
+            for (AlbumStorageDTO albumStorage : storage) {
+                System.out.println(albumStorage);
+            }
+            System.out.println("----------------------------");
         }
     }
 }

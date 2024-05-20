@@ -57,7 +57,7 @@ public class EmployeeController {
             new StorageAdminView().storageAdminMenu();
         } else {
             System.out.printf("환영합니다, %s %s님\n\n", foundEmployee.getName(), Role.STORE_MANAGER.getRoleName());
-            new StoreManagerView().storeManagerMenu();
+            new StoreManagerView().storeManagerMenu(foundEmployee);
         }
     }
 

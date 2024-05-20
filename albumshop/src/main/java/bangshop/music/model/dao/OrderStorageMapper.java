@@ -10,7 +10,7 @@ import java.util.Map;
 public interface OrderStorageMapper {
     List<AlbumStorageDTO> findStorageStock(String number);
 
-    List<Map<String, Object>> getStoreAlbumStock(int employeeNo);
-
     List<OrderDTO> findOrder();
+
+    List<AlbumStorageDTO> getAlbumStockByStorageNo(int employeeId);
 }

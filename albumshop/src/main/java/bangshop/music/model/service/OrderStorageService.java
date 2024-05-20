@@ -32,12 +32,12 @@ public class OrderStorageService {
         }
     }
 
-    public static List<Map<String, Object>> findStoreAlbumStock(EmployeeDTO employee) {
-        try (SqlSession sqlSession = MyBatisTemplate.getSqlSession()) {
+    public static List<AlbumStorageDTO> getAlbumStockByStorageNo(int employeeId) {
+        try (SqlSession sqlSession = getSqlSession()) {
             OrderStorageMapper orderStorageMapper = sqlSession.getMapper(OrderStorageMapper.class);
-
-            // 점장의 가맹점 앨범 재고 조회
-            return orderStorageMapper.getStoreAlbumStock(employee.getEmployeeNo());
+            List<AlbumStorageDTO> stock = orderStorageMapper.getAlbumStockByStorageNo(employeeId);
+            sqlSession.close();
+            return stock;
         }
     }
 }

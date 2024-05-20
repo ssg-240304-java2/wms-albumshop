@@ -4,26 +4,24 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.OrderStorageMapper">
     <!-- 창고의 앨범 재고 조회 -->
-    <select id="getAlbumStockByStorageNo" parameterType="int" resultType="map">
+    <select id="getAlbumStockByStorageNo" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
         SELECT
-        a.album_no,
-        a.album_name,
-        e.name,
-        a.singer,
-        a.release_date,
-        a.price,
-        ast.stock
+        album_storage.album_no AS albumNo,
+        album_storage.stock AS stock,
+        e.employee_no AS employeeNo,
+        s.store_name
         FROM
-        store s
-        LEFT JOIN album_storage ast ON s.store_no = ast.storage_no
-        LEFT JOIN album a ON ast.album_no = a.album_no
-        LEFT JOIN employee e ON s.employee_no = e.employee_no
+        album_storage
+        LEFT JOIN
+        employee e ON album_storage.employee_no = e.employee_no
+        LEFT JOIN
+        store s ON album_storage.employee_no = s.employee_no
         WHERE
-        e.employee_no = #{employeeNo};
+        e.employee_no = #{number}
     </select>
 
     <select id="findOrder" resultType="bangshop.music.model.dto.OrderDTO">
-        select * from orders
+        select order_no, order_date, quantity, total_price, store_no, album_no from orders
     </select>
 
     <select id="findStorageStock" parameterType="String" resultType="bangshop.music.model.dto.AlbumStorageDTO">

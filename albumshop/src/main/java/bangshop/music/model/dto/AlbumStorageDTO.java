@@ -12,4 +12,5 @@ public class AlbumStorageDTO {
     private Integer stock;
     private String albumNo;
     private Integer storageNo;
+    private Integer employee_no;
 }
