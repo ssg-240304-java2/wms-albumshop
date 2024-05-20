@@ -3,7 +3,6 @@ package bangshop.music.model.service;
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
 import bangshop.music.model.dao.SearchMapper;
-import bangshop.music.model.dao.dao;
 import bangshop.music.model.dto.AlbumDTO;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;

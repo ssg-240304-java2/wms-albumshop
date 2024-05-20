@@ -5,6 +5,8 @@ import bangshop.music.controller.DispatchController;
 import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
 //import bangshop.music.controller.StorageController;
+import bangshop.music.controller.StorageController;
+import bangshop.music.model.dao.AlbumMapper;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.AlbumStorageDTO;
@@ -21,7 +23,7 @@ import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
-    //private final StorageController storageController = new StorageController();
+    private final StorageController storageController = new StorageController();
 
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
@@ -37,8 +39,8 @@ public class StorageAdminView {
                     case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
                     case ORDERS -> OrderStorageController.findOrder();
-                    //case STOCK_IN -> storageController.insertStock(inStockAlbum());
-                    //case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
+                    case STOCK_IN -> storageController.insertStock(inStockAlbum());
+                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
                         dispatchController.dispatch();
@@ -62,11 +64,11 @@ public class StorageAdminView {
         Scanner sc = new Scanner(System.in);
         AlbumDTO album = null;
 
-        String no = IOUtils.input("앨범번호를 입력하세요 : ");
-        String name = IOUtils.input("앨범명을 입력하세요 : ");
-        String singer = IOUtils.input("가수를 입력하세요 : ");
-        Date date = Date.valueOf(IOUtils.input("발매일을 입력하세요 : "));
-        int price = Integer.parseInt(IOUtils.input("가격을 입력하세요 : "));
+        String no = IOUtils.input("1. 앨범번호를 입력하세요 : ");
+        String name = IOUtils.input("2. 앨범명을 입력하세요 : ");
+        String singer = IOUtils.input("3. 가수를 입력하세요 : ");
+        Date date = Date.valueOf(IOUtils.input("4. 발매일을 입력하세요 : "));
+        int price = Integer.parseInt(IOUtils.input("5. 가격을 입력하세요 : "));
 
         album = new AlbumDTO(no, name, singer, date, price );
 
@@ -102,7 +104,7 @@ public class StorageAdminView {
     }
 
     private String inputKeyword() {
-        return IOUtils.input("키워드를 입력하세요: ");
+        return IOUtils.input("검색 키워드를 입력하세요: ");
     }
 
     private String inputEmployeeName() {

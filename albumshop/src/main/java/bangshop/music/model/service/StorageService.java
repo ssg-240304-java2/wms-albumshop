@@ -1,7 +1,7 @@
 package bangshop.music.model.service;
 
-import bangshop.music.common.utils.IOUtils;
-import bangshop.music.model.dao.Mapper;
+import bangshop.music.model.dao.AlbumMapper;
+import bangshop.music.model.dao.StockInMapper;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
@@ -13,7 +13,8 @@ import java.util.List;
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
 public class StorageService {
-    private Mapper mapper;
+    private StockInMapper mapper;
+    private AlbumMapper albumMapper;
     private PrintsResult printsResult;
 
     public StorageService() {
@@ -23,7 +24,7 @@ public class StorageService {
     public void insertStock(InsertStockRequest request) {
 
         SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(Mapper.class);
+        mapper = sqlSession.getMapper(StockInMapper.class);
 
         // 1. 사용자가 요청한 앨범 번호가 앨범에 있는지 체크 -> 잘못된 번호입니다! 에러던지기
         if(!mapper.isExistAlbum(request.getAlbumNo())){
@@ -74,7 +75,7 @@ public class StorageService {
     //입고내역 조회
     public List<StockInDTO> getStockList(StockInDTO request) {
         SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(Mapper.class);
+        mapper = sqlSession.getMapper(StockInMapper.class);
 
         List<StockInDTO> result = mapper.getStockList(request);
 
@@ -95,12 +96,12 @@ public class StorageService {
     public void insertAlbum(AlbumDTO request) {
 
         SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(Mapper.class);
+        albumMapper = sqlSession.getMapper(AlbumMapper.class);
 
-        if (mapper.isExistAlbum(request.getAlbumNo())){
+        if (albumMapper.isExistAlbum(request.getAlbumNo())){
             throw new IllegalArgumentException("해당 앨범이 이미 존재합니다. ");
         } else {
-            int result = mapper.insertAlbum(request);
+            int result = albumMapper.insertAlbum(request);
 
             if(result > 0) {
              printsResult.printSuccessMessage("insertAlbum") ;

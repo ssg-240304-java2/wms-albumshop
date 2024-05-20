@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bangshop.music.model.dao.Mapper">
+<mapper namespace="bangshop.music.model.dao.StockInMapper">
     <!-- 앨범 입고 -->
     <resultMap id="albumResultMap" type="bangshop.music.model.dto.AlbumStorageDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
         <id property="albumNo" column="album_no"/>
