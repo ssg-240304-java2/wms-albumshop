@@ -5,13 +5,12 @@ import bangshop.music.controller.DispatchController;
 import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
 import bangshop.music.controller.StorageController;
-import bangshop.music.model.dao.AlbumMapper;
-import bangshop.music.controller.StorageController;
 
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
+import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.sql.Date;

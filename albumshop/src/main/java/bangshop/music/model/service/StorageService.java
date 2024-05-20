@@ -1,6 +1,5 @@
 package bangshop.music.model.service;
 
-import bangshop.music.model.dao.AlbumMapper;
 import bangshop.music.model.dao.StockInMapper;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.StockInDTO;
@@ -14,7 +13,6 @@ import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
 public class StorageService {
     private StockInMapper mapper;
-    private AlbumMapper albumMapper;
     private PrintsResult printsResult;
 
     public StorageService() {
@@ -96,12 +94,12 @@ public class StorageService {
     public void insertAlbum(AlbumDTO request) {
 
         SqlSession sqlSession = getSqlSession();
-        albumMapper = sqlSession.getMapper(AlbumMapper.class);
+        mapper = sqlSession.getMapper(StockInMapper.class);
 
-        if (albumMapper.isExistAlbum(request.getAlbumNo())){
+        if (mapper.isExistAlbum(request.getAlbumNo())){
             throw new IllegalArgumentException("해당 앨범이 이미 존재합니다. ");
         } else {
-            int result = albumMapper.insertAlbum(request);
+            int result = mapper.insertAlbum(request);
 
             if(result > 0) {
              printsResult.printSuccessMessage("insertAlbum") ;
