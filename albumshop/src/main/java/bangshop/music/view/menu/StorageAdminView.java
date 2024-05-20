@@ -3,11 +3,15 @@ package bangshop.music.view.menu;
 import bangshop.music.common.utils.IOUtils;
 
 
+import bangshop.music.controller.OrderStorageController;
 import bangshop.music.controller.storageController;
+import bangshop.music.model.dto.AlbumStorageDTO;
+import bangshop.music.model.dto.OrderDTO;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
+import java.util.List;
 import java.util.Scanner;
 
 import bangshop.music.controller.EmployeeController;
@@ -17,6 +21,7 @@ import java.util.Map;
 import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
 
 import bangshop.music.controller.DispatchController;
+import bangshop.music.model.service.OrderStorageService;
 
 
 public class StorageAdminView {
@@ -33,10 +38,11 @@ public class StorageAdminView {
 
                 storageController storageController = new storageController();
 
+
                 System.out.println("===============================");
                 switch (menu) {
-//                case STORAGE_STOCK ->//TODO: 앨범 재고 확인
-//                case ORDERS ->//TODO: 주문 내역 조회
+                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");//TODO: 앨범 재고 확인
+                    case ORDERS -> OrderStorageController.findOrder(); //주문 내역 조회
                     case STOCK_IN ->
                             storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
                     case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
@@ -106,5 +112,31 @@ public class StorageAdminView {
 
     private String inputEmployeeName() {
         return IOUtils.input("직원명을 입력하세요: ");
+    }
+
+    public static void displayStorage(List<AlbumStorageDTO> stock) {
+        if(stock == null) {
+            System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
+        }
+        else {
+            System.out.println("----------------------------");
+            for(AlbumStorageDTO storage : stock) {
+                System.out.println(storage);
+            }
+            System.out.println("----------------------------");
+        }
+    }
+
+    public static void displayOrder(List<OrderDTO> orders) {
+        if(orders == null) {
+            System.out.println("> 😅😅😅 조회된 주문이 없습니다. 😅😅😅");
+        }
+        else {
+            System.out.println("----------------------------");
+            for(OrderDTO order : orders) {
+                System.out.println(order);
+            }
+            System.out.println("----------------------------");
+        }
     }
 }
