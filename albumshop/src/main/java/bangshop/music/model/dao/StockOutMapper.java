@@ -6,11 +6,12 @@ import bangshop.music.model.dto.StockOutAndStorageDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StockOutMapper {
     List<StockOutAndStorageDTO> findStockOuts(@Param("status") StockOutStatus status);
 
     int update(StockOut stockOut);
 
-    StockOut orderById(@Param("orderNo") int orderNo);
+    Optional<StockOut> orderById(@Param("orderNo") int orderNo);
 }
