@@ -33,7 +33,7 @@ public class StorageAdminView {
 
                 System.out.println("===============================");
                 switch (menu) {
-                    case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
+//                    case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
                     case ORDERS -> OrderStorageController.findOrder();
                     //case STOCK_IN -> storageController.insertStock(inStockAlbum());
@@ -101,7 +101,7 @@ public class StorageAdminView {
     }
 
     private String inputKeyword() {
-        return IOUtils.input("키워드를 입력하세요: ");
+        return IOUtils.input("지점명 또는 주소를 입력하세요: ");
     }
 
     private String inputEmployeeName() {

@@ -38,7 +38,8 @@ public class DispatchService {
                 throw new IllegalArgumentException("출고 리스트에 존재하지 않습니다.");
             }
 
-            OrderDTO orderDTO = orderMapper.getById(stockOut.getOrderNo());
+//            OrderDTO orderDTO = orderMapper.getById(stockOut.getOrderNo());
+            OrderDTO orderDTO = new OrderDTO();
             AlbumStorageDTO albumStorageDTO = albumStorageMapper.find(orderDTO.getAlbumNo(), stockOut.getStorageNo());
             albumStorageDTO.stockDecrease(orderDTO.getQuantity());
             albumStorageMapper.update(albumStorageDTO);
