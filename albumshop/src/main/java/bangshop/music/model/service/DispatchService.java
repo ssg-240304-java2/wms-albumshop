@@ -43,6 +43,8 @@ public class DispatchService {
             albumStorageDTO.stockDecrease(orderDTO.getQuantity());
             albumStorageMapper.update(albumStorageDTO);
 
+
+
             stockOut.complete();
             int result = stockOutMapper.update(stockOut);
 

@@ -4,12 +4,11 @@ import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.DispatchController;
 import bangshop.music.controller.EmployeeController;
 import bangshop.music.controller.OrderStorageController;
-//import bangshop.music.controller.StorageController;
+import bangshop.music.controller.StorageController;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
-import bangshop.music.model.dto.StockInDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
 
 import java.sql.Date;
@@ -21,7 +20,7 @@ import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
-    //private final StorageController storageController = new StorageController();
+    private final StorageController storageController = new StorageController();
 
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
