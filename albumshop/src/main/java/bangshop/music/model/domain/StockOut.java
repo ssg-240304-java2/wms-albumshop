@@ -1,4 +1,4 @@
-package bangshop.music.model;
+package bangshop.music.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +16,12 @@ public class StockOut {
     private int storageNo;
     private int orderNo;
 
-    public StockOut(int storageNo, int orderNo) {
-        this.status = StockOutStatus.WAITING;
-        this.storageNo = storageNo;
-        this.orderNo = orderNo;
+    public void complete() {
+        if (this.status == StockOutStatus.COMPLETE) {
+            throw new IllegalStateException("이미 출고 완료되었습니다.");
+        }
+
+        this.status = StockOutStatus.COMPLETE;
+        this.stockOutDate = LocalDateTime.now();
     }
 }

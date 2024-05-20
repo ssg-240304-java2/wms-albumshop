@@ -1,4 +1,4 @@
-package bangshop.music.model;
+package bangshop.music.model.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

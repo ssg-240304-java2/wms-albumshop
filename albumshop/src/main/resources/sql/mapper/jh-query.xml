@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-</properties>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.OrderStorageMapper">
+    <!-- 창고의 앨범 재고 조회 -->
+    <select id="getAlbumStockByStorageNo" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
+        SELECT
+        album_storage.album_no AS albumNo,
+        album_storage.stock AS stock,
+        e.employee_no AS employeeNo,
+        s.store_name
+        FROM
+        album_storage
+        LEFT JOIN
+        employee e ON album_storage.employee_no = e.employee_no
+        LEFT JOIN
+        store s ON album_storage.employee_no = s.employee_no
+        WHERE
+        e.employee_no = #{number}
+    </select>
+
+    <select id="findOrder" resultType="bangshop.music.model.dto.OrderDTO">
+        select order_no, order_date, quantity, total_price, store_no, album_no from orders
+    </select>
+
+    <select id="findStorageStock" parameterType="String" resultType="bangshop.music.model.dto.AlbumStorageDTO">
+        select * from album_storage where storage_no = #{number}
+    </select>
+</mapper>

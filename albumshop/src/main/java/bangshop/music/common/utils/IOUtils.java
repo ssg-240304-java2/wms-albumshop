@@ -20,4 +20,9 @@ public class IOUtils {
         System.out.print(text);
         return SCANNER.nextLine();
     }
+
+    public static int input_n(String text) {
+        System.out.print(text);
+        return SCANNER.nextInt();
+    }
 }

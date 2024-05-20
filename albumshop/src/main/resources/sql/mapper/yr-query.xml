@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.StockOutMapper">
 
-    <resultMap id="stockOutResultMap" type="StockOutAndStorageDTO">
+    <resultMap id="stockOutResultMap" type="stockOutAndStorageDTO">
         <id property="stockOutNo" column="stock_out_no"/>
         <result property="stockOutDate" column="stock_out_date"/>
         <result property="status" column="status" javaType="StockOutStatus"/>
@@ -12,38 +12,74 @@
         <association property="order" resultMap="orderResultMap"/>
     </resultMap>
 
-    <resultMap id="storageResultMap" type="StorageDTO">
+    <resultMap id="storageResultMap" type="storageDTO">
         <id property="storageNo" column="storage_no"/>
         <result property="type" column="type"/>
         <result property="storageCode" column="storage_code"/>
     </resultMap>
 
-    <resultMap id="orderResultMap" type="OrderDTO">
+    <resultMap id="orderResultMap" type="orderDTO">
         <id property="orderNo" column="order_no"/>
         <result property="albumNo" column="album_no"/>
         <result property="quantity" column="quantity"/>
         <association property="store" resultMap="storeResultMap"/>
     </resultMap>
 
-    <resultMap id="storeResultMap" type="StoreDTO">
+    <resultMap id="storeResultMap" type="storeDTO">
         <id property="storeNo" column="store_no"/>
         <result property="storeName" column="store_name"/>
         <result property="storeAddress" column="store_address"/>
         <result property="employeeNo" column="employee_no"/>
     </resultMap>
 
+    <resultMap id="stockOutMap" type="stockOut">
+        <id property="stockOutNo" column="stock_out_no"/>
+        <result property="stockOutDate" column="stock_out_dat"/>
+        <result property="status" column="status"/>
+        <result property="storageNo" column="storage_no"/>
+        <result property="orderNo" column="order_no"/>
+    </resultMap>
+
     <select id="findStockOuts" resultMap="stockOutResultMap">
         select
         so.stock_out_no,
         so.order_no,
-        o.album_no,
-        o.quantity,
         so.status,
         so.stock_out_date,
+        o.album_no,
+        o.quantity,
         o.store_no,
         s.storage_no
         from stock_out so
-        left join orders o on so.order_no = o.order_no
-        left join storage s on so.storage_no = s.storage_no
+        join orders o on so.order_no = o.order_no
+        join storage s on so.storage_no = s.storage_no
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </where>
     </select>
+
+    <select id="orderById" resultMap="stockOutMap">
+        select *
+        from stock_out
+        where order_no = #{orderNo}
+    </select>
+
+    <update id="updateStatus">
+        update stock_out
+        set stock_out_date = now(),
+            status = #{status}
+        where order_no = #{orderNo}
+    </update>
+
+    <update id="update" parameterType="stockOut">
+        update stock_out
+        set stock_out_date = #{stockOutDate},
+            status = #{status},
+            storage_no = #{storageNo},
+            order_no = #{orderNo}
+        where stock_out_no = #{stockOutNo}
+    </update>
+    
 </mapper>

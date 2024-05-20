@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <comment/>
-</properties>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.Mapper">
+    <!-- 앨범 입고 -->
+    <resultMap id="albumResultMap" type="bangshop.music.model.dto.AlbumStorageDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
+        <id property="albumNo" column="album_no"/>
+    </resultMap>
+    <resultMap id="stockResultMap" type="bangshop.music.model.dto.StockInDTO"> <!--DTO 의 풀네임을 전부 써줘야-->
+        <id property="stockInNo" column="stock_in_no"/>
+    </resultMap>
+    <insert id="insertAlbumStorage" parameterType="bangshop.music.model.dto.stock.InsertStockRequest">
+        INSERT INTO album_storage(stock, album_no,storage_no)
+        VALUES (#{quantity}, #{albumNo}, 2)
+    </insert>
+
+    <select id="isExistAlbumInStorage" parameterType="String" resultType="boolean">
+        SELECT EXISTS (
+        SELECT 1
+        FROM album_storage
+        WHERE album_no = #{albumNo}
+        LIMIT 1
+        );
+    </select>
+    <select id="isExistAlbum" parameterType="String" resultType="boolean">
+        SELECT EXISTS (
+        SELECT 1
+        FROM album
+        WHERE album_no = #{albumNo}
+        LIMIT 1
+        );
+    </select>
+    <update id="updateAlbumStorage" >
+        UPDATE album_storage SET stock = stock + #{quantity}
+        WHERE album_no = #{albumNo}
+    </update>
+
+    <insert id="createStock" >
+        INSERT INTO stock_in(quantity, stock_in_date , storage_admin_no ,album_no, storage_no)
+        VALUES (#{quantity}, now() , 1 , #{albumNo}, 2 );
+    </insert>
+    <select id="getStockList" parameterType="bangshop.music.model.dto.StockInDTO" resultMap="stockResultMap">
+        select *
+        from stock_in;
+    </select>
+</mapper>
+

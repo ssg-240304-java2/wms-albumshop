@@ -1,111 +1,52 @@
-#  JD-HeadBang
-4조
+# HeadBang- AlbumShop
 
 ## 🎼 프로젝트 소개
-앨범샵으로 유저가 로그인을 해서 가수의 이름이나 노래이름으로 검색해서 구매하는 프로그램입니다.
+**앨범 재고 관리 프로그램으로, 창고 관리자가 앨범 입고/출고를 통해 관리하고 
+가맹점에선 본사로 앨범을 주문하고 재고를 관리합니다.** 
 <br>
 
 ## 🕰️ 개발 기간
-* 24.04.26일 - 24.04.30일
+* 24.05.16일 - 24.05.21일
 
 ### 🧑‍🤝‍🧑 멤버구성
- - 팀원1 : 김다빈 - 트랙리스트의 가수, 작곡가, 발매일순으로 출력하는 정렬 기능 구현
- - 팀원2 : 노영록 - 장바구니에 앨범 담기 구현, 장바구니에 담겨 있는 앨범 삭제 구현
- - 팀원3 : 송재혁 - 로그인입력과 MenuHandler와 view 부분의 출력 및 노래재생 부분을 구현
- - 팀원4 : 육슬찬 - 
- - 팀원5 : 이창연 -
+ - 팀원1 : 김다빈 - 입고 관리  
+ - 팀원2 : 노영록 - 출고 관리 
+ - 팀원3 : 송재혁 - 창고 및 가맹점 재고 조회, 주문 내역 조회  
+ - 팀원4 : 육슬찬 - 앨범 검색, 앨범 조회, 앨범 주문  
+ - 팀원5 : 이창연 - 로그인, 회원가입 ,계정 관리 
 
 ### ⚙️ 개발 환경
 -  ``` Java 17 ```
 - ``` JDK-17.0.10+7 ```
 - **IDE** : IntelliJ IDEA Ultimate 2023.3.6
-
+- **ORM 프레임워크** : mybatis
+  
 ### 📂폴더구조
 ``` 
-music
-    ├─application
-    │      CartService.java
-    │      
-    ├─comparable
-    │  └─sort
-    │      ├─album
-    │      │      AscPrice.java
-    │      │      DescCollectionName.java
-    │      │      DescPrice.java
-    │      │      
-    │      ├─track
-    │      │      AscArtistName.java
-    │      │      AscReleaseDate.java
-    │      │      AscTrackName.java
-    │      │      DescArtistName.java
-    │      │      DescReleaseDate.java
-    │      │      DescTrackName.java
-    │      │      
-    │      └─track50
-    │              AscArtistName.java
-    │              AscReleaseDate.java
-    │              AscTrackName.java
-    │              DescArtistName.java
-    │              DescReleaseDate.java
-    │              DescTrackName.java
-    │              
-    ├─domain
-    │  │  Cart.java
-    │  │  CartItem.java
-    │  │  CartRepository.java
-    │  │  MyAlbum.java
-    │  │  Search.java
-    │  │  
-    │  └─dto
-    │          AlbumDTO.java
-    │          TrackDTO.java
-    │          
-    ├─infrastructure
-    │      CartInMemoryRepository.java
-    │      
-    ├─service
-    │      AudioPlayer.java
-    │      Database.java
-    │      
-    └─ui
-        └─console
-            │  CartController.java
-            │  Command.java
-            │  CommandHandler.java
-            │  MusicApplication.java
-            │  PrintList.java
-            │  PurchaseCommand.java
-            │  SearchCommand.java
-            │  SongCommand.java
-            │  SortCommand.java
-            │  
-            └─utils
-                    InputUtils.java
+
 ```    
 
 
 ## 📌 주요 기능
-#### 로그인 
-- ID찾기, PW찾기
-- 로그인 시 메뉴접근
+#### 입고
+- 
+- 
 
-#### 검색 
-- iTunes API를 통해 검색어로 노래를 하는 기능을 한다
-- 현재 top50에들어가는 노래를 보여준다
-- 또 검색을 통해 그노래에 해당하는 앨범을 장바구니에 넣어준다
+#### 출고 
+- 본사는 가맹점주의 주문서를 기반으로 본사창고의 재고에 따라 출고를 해줍니다.
 
-#### 장바구니
-- 주소 API 연동
-- 장바구니에 앨범 담기
-- 장바구니에 담긴 앨범 구매하기
-- 장바구니에 담긴 앨범 수량 변경
-- 장바구니에 담긴 앨범 삭제
+#### 앨범 주문
+- 가맹점주는 가맹점의 재고를 검색을 통해 앨범당 재고를 확인하고 본사로 앨범주문을 통해 가맹점의 재고를 관리 하게 됩니다
 
-#### 정렬 
-- 트랙리스트의 발매일, 작곡가, 가수를 기준으로 정렬하는 기능을 구현 
+#### 앨범 재고 관리 
+- 가맹점에서 본사로 앨범주문을 하면 본사창고의 재고에 따라 출고 여부를 결정 지을 수 있으며 출고를 결정하게되면 가맹점의 창고의 재고가 증가하게됩니다
 
-#### 음악재생 
-- JavaFX를 이용해서 검색에서 찾은 노래에대한 미리듣기URL로 음악을 재생
--  JavaFX에 대한 특성 때문에 메뉴와 음악재생하는 기능에 대한 쓰레드를 나눴음
+####  계정 관리
+- 가맹점이 새로 오픈하게되면 창고 관리자가 계정을 생성합니다. 또한 반대로 가맹점이 문을 닫으면 계정을 삭제합니다
 
-
+## 🗣️ 후기 
+ - 팀원1 : 김다빈 
+ - 팀원2 : 노영록 
+ - 팀원3 : 송재혁 
+ - 팀원4 : 육슬찬 
+ - 팀원5 : 이창연 
