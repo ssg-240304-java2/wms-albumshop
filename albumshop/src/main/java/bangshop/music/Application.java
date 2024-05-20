@@ -1,6 +1,5 @@
 package bangshop.music;
 
-
 import bangshop.music.view.menu.MainMenu;
 
 public class Application {

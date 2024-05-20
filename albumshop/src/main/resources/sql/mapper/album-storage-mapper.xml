@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bangshop.music.model.dao.AlbumStorageMapper">
+
+    <resultMap id="albumStorageMap" type="albumStorageDTO">
+        <id property="albumStorageNo" column="album_storage_no"/>
+        <result property="stock" column="stock"/>
+        <result property="albumNo" column="album_no"/>
+        <result property="storageNo" column="storage_no"/>
+    </resultMap>
+
+    <select id="find" resultMap="albumStorageMap">
+        select *
+            from album_storage
+        where album_no = #{albumNo} and storage_no = #{storageNo}
+    </select>
+
+    <update id="update" parameterType="albumStorageDTO">
+        update album_storage
+        set
+            album_storage_no = #{albumStorageNo},
+            stock = #{stock},
+            album_no = #{albumNo},
+            storage_no = #{storageNo}
+        where album_storage_no = #{albumStorageNo}
+    </update>
+</mapper>
