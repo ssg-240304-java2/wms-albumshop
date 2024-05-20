@@ -2,7 +2,6 @@ package bangshop.music.model.dao;
 
 import bangshop.music.model.domain.StockOut;
 import bangshop.music.model.domain.StockOutStatus;
-import bangshop.music.model.dto.OrderDTO;
 import bangshop.music.model.dto.StockOutAndStorageDTO;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,8 +13,4 @@ public interface StockOutMapper {
     int update(StockOut stockOut);
 
     StockOut orderById(@Param("orderNo") int orderNo);
-
-    OrderDTO getById(int orderId);
-
-
 }

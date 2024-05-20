@@ -14,6 +14,7 @@ public class OrderDTO {
     private String albumNo;
     private String storeName;
     private String albumName;
+    private StoreDTO store;
 
     @Override
     public String toString() {
