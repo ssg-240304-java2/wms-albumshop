@@ -6,6 +6,7 @@ import bangshop.music.model.dto.StockOutAndStorageDTO;
 import bangshop.music.model.service.DispatchService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DispatchController {
     private final DispatchService dispatchService = new DispatchService();
@@ -23,22 +24,23 @@ public class DispatchController {
 
         int result = dispatchService.dispatch(orderNo);
         if (result > 0) {
-            System.out.println(orderNo + "- 출고 되었습니다.");
+            System.out.println(orderNo + "번 출고 되었습니다.");
         }
     }
 
     private void printStockOuts(List<StockOutAndStorageDTO> stockOuts) {
-        for (StockOutAndStorageDTO stockOut : stockOuts) {
-            System.out.println(
-                    "출고 번호: " + stockOut.getStockOutNo() + ", " +
-                            "주문 번호: " + stockOut.getOrder().getOrderNo() + ", " +
-                            "앨범 정보: " + stockOut.getOrder().getAlbumNo() + ", " +
-                            "주문 수량: " + stockOut.getOrder().getQuantity() + ", " +
-                            "출고 상태: " + stockOut.getStatus().getDescription() + ", " +
-                            "출고 일자: " + stockOut.getStockOutDate() + ", " +
-                            "창고 번호: " + stockOut.getStorage().getStorageNo()
-            );
-        }
+        String stocks = stockOuts.stream()
+                .map(this::format)
+                .collect(Collectors.joining(System.lineSeparator()));
+        System.out.println(stocks);
     }
 
+    private String format(StockOutAndStorageDTO stockOut) {
+        return "주문 번호: " + stockOut.getOrder().getOrderNo() + ", " +
+                "앨범 정보: " + stockOut.getOrder().getAlbumNo() + ", " +
+                "주문 수량: " + stockOut.getOrder().getQuantity() + ", " +
+                "출고 상태: " + stockOut.getStatus().getDescription() + ", " +
+                "출고 일자: " + stockOut.getStockOutDate() + ", " +
+                "창고 번호: " + stockOut.getStorage().getStorageNo();
+    }
 }
