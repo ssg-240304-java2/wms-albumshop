@@ -4,20 +4,12 @@ import bangshop.music.common.utils.IOUtils;
 import bangshop.music.controller.OrderStorageController;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.EmployeeDTO;
-import lombok.Getter;
-import lombok.Setter;
 
 import bangshop.music.controller.SearchController;
 
 import java.util.List;
-import java.util.Map;
 
 public class StoreManagerView {
-
-    @Getter
-    @Setter
-    private static EmployeeDTO loggedInEmployee;
-
     private SearchController searchController = new SearchController();
 
     public void storeManagerMenu(EmployeeDTO emp) {
@@ -28,7 +20,7 @@ public class StoreManagerView {
 
             switch (menu) {
                 case SEARCH_ALBUM -> searchAlbum();//TODO: 앨범 검색 및 조회
-//                case ORDERS ->//TODO: 앨범 주문
+                case ORDERS -> order();
                 case STOCK_INFO -> OrderStorageController.findstoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
@@ -36,6 +28,12 @@ public class StoreManagerView {
                 }
             }
         }
+    }
+
+    private void order() {
+        System.out.println("========== 앨범 주문 메뉴 ==========");
+        String albumNo = IOUtils.input("앨범 번호: ");
+        int quantity = Integer.parseInt(IOUtils.input("수량: "));
     }
 
     private static void displayMenu() {
