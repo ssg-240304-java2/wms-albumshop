@@ -4,7 +4,7 @@ import bangshop.music.common.utils.IOUtils;
 
 
 import bangshop.music.controller.OrderStorageController;
-import bangshop.music.controller.storageController;
+import bangshop.music.controller.StorageController;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
 import bangshop.music.model.domain.StockOutStatus;
@@ -26,7 +26,7 @@ import bangshop.music.model.service.OrderStorageService;
 
 public class StorageAdminView {
     private final DispatchController dispatchController = new DispatchController();
-
+    private final StorageController storageController = new StorageController();
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
 
@@ -36,15 +36,14 @@ public class StorageAdminView {
                 String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
                 StorageAdminMenu menu = StorageAdminMenu.from(inputMenu);
 
-                storageController storageController = new storageController();
+                StorageController storageController = new StorageController();
 
 
                 System.out.println("===============================");
                 switch (menu) {
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");//TODO: 앨범 재고 확인
                     case ORDERS -> OrderStorageController.findOrder(); //주문 내역 조회
-                    case STOCK_IN ->
-                            storageController.insertStock((InsertStockRequest) inStockAlbum()); //TODO 다빈: 앨범 입고
+                    case STOCK_IN -> storageController.insertStock(inStockAlbum()); //TODO 다빈: 앨범 입고
                     case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO()); //TODO 다빈: 앨범 입고 내역 조회
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
@@ -57,9 +56,9 @@ public class StorageAdminView {
                     case LOG_OUT -> {
                         System.out.println();
                         return;
+                        }
                     }
-                }
-            } catch(Exception e){
+                } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -69,26 +68,17 @@ public class StorageAdminView {
         displayMenu();
     }
 
-    private Object inStockAlbum() {
+    private InsertStockRequest inStockAlbum() {
 
         Scanner sc = new Scanner(System.in);
         InsertStockRequest stock = null;
         try {
-            System.out.print("입고할 앨범 코드를 입력하세요 : ");
-            String albumNo = sc.nextLine();
-
-            System.out.print("입고할 수량을 입력하세요 : ");
-            int quantity = sc.nextInt();
+            String albumNo = IOUtils.input("입고할 앨범 코드를 입력하세요 : ");
+            int quantity = Integer.parseInt( IOUtils.input("입고할 수량을 입력하세요 : "));
             stock = new InsertStockRequest(albumNo, quantity);
         } catch (Exception e) {
-            System.out.println("잘못된 입력입니다. 다시 시도해 주세요.");
-            sc.nextLine();
-        } finally {
-            sc.close();
+            throw new IllegalArgumentException("잘못된 입력입니다. 다시 시도해 주세요.");
         }
-        System.out.println("stock = " + stock.getAlbumNo());
-        System.out.println("stock = " + stock.getQuantity());
-
         return stock;
     }
 

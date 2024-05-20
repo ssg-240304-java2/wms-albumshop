@@ -6,17 +6,7 @@ import java.util.List;
 
 //view에서 출력하는 것을 대체함
 public class PrintsResult {
-
-    public void printAlbumList(List<AlbumDTO> albumList){
-        for(AlbumDTO album : albumList ){
-            System.out.println(album);
-        }
-    }
-
-    public void printAlbum(AlbumDTO album) {
-        System.out.println(album);
-    }
-
+    
     public String printErrorMessage(String errorCode){
 
         String errorMessage = "";
