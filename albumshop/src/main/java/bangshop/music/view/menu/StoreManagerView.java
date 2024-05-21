@@ -1,6 +1,7 @@
 package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
+import bangshop.music.controller.OrderController;
 import bangshop.music.controller.OrderStorageController;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.EmployeeDTO;
@@ -10,7 +11,8 @@ import bangshop.music.controller.SearchController;
 import java.util.List;
 
 public class StoreManagerView {
-    private SearchController searchController = new SearchController();
+    private final SearchController searchController = new SearchController();
+    private final OrderController orderController = new OrderController();
 
     public void storeManagerMenu(EmployeeDTO emp) {
         while (true) {
@@ -19,9 +21,9 @@ public class StoreManagerView {
             StoreManagerMenu menu = StoreManagerMenu.from(inputMenu);
 
             switch (menu) {
-                case SEARCH_ALBUM -> searchAlbum();//TODO: 앨범 검색 및 조회
-                case ORDERS -> order();
-                case STOCK_INFO -> OrderStorageController.findstoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
+                case SEARCH_ALBUM -> searchAlbum(emp.getEmployeeNo());
+                case ORDERS -> orderController.order(emp.getEmployeeNo());
+                case STOCK_INFO -> OrderStorageController.getStoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
@@ -30,20 +32,14 @@ public class StoreManagerView {
         }
     }
 
-    private void order() {
-        System.out.println("========== 앨범 주문 메뉴 ==========");
-        String albumNo = IOUtils.input("앨범 번호: ");
-        int quantity = Integer.parseInt(IOUtils.input("수량: "));
-    }
-
     private static void displayMenu() {
-        System.out.println("==========점장메뉴 메뉴==========");
+        System.out.println("==========점장 메뉴==========");
         for (StoreManagerMenu menu : StoreManagerMenu.values()) {
             System.out.println(menu.getCode() + ". " + menu.getTitle());
         }
     }
 
-    private void searchAlbum() {
+    private void searchAlbum(int employeeNo) {
         System.out.println("========== 앨범 검색 메뉴 ==========");
         System.out.println("1. 가수로 검색");
         System.out.println("2. 제목으로 검색");
@@ -51,9 +47,9 @@ public class StoreManagerView {
 
         String inputMenu = IOUtils.input("메뉴를 입력하세요: ");
         switch (inputMenu) {
-            case "1"-> searchController.searchAlbumBySinger();
-            case "2" -> searchController.searchAlbumByTitle();
-            case "3"-> searchController.searchAlbumByNo();
+            case "1" -> searchController.searchAlbumBySinger(employeeNo);
+            case "2" -> searchController.searchAlbumByTitle(employeeNo);
+            case "3" -> searchController.searchAlbumByNo(employeeNo);
         }
 
     }

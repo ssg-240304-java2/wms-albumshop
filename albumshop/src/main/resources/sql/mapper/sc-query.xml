@@ -4,29 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.SearchMapper">
 
-    <resultMap id="orderResultMap" type="orderDTO">
-        <id property="orderNo" column="order_no"/>
-        <result property="orderDate" column="order_date"/>
-        <result property="quantity" column="quantity"/>
-        <result property="totalPrice" column="total_price"/>
-        <result property="albumNo" column="album_no"/>
-        <association property="store" resultMap="storeResultMap"/>
-    </resultMap>
-
-    <resultMap id="storeResultMap" type="storeDTO">
-        <id property="storeNo" column="store_no"/>
-        <result property="storeName" column="store_name"/>
-        <result property="storeAddress" column="store_address"/>
-        <result property="employeeNo" column="employee_no"/>
-        <result property="storageNo" column="storage_no"/>
-    </resultMap>
-
-    <select id="getById" resultMap="orderResultMap">
-        select *
-        from orders
-        where order_no = #{orderNo}
-    </select>
-
     <select id="searchAlbumByTitle" resultType="albumDTO">
         SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
@@ -43,18 +20,25 @@
         WHERE singer LIKE CONCAT('%', #{singer}, '%')
     </select>
 
-    <select id="searchAlbumByNo" resultType="albumDTO">
+    <select id="searchAlbumByNo" resultType="map">
         SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
         join album a
         on a.album_no = als.album_no
         WHERE a.album_no=#{albumNo}
     </select>
-    <select id="order" resultType="orderDTO">
-        SELECT a.album_no, singer, album_name, release_date, price
-        FROM album_storage als
-        join album a
-        on a.album_no = als.album_no
-        WHERE a.album_no=#{albumNo}
+    <insert id="order">
+        INSERT INTO orders(order_date, quantity, total_price, store_no, album_no)
+        VALUES
+        (NOW(), #{quantity}, (SELECT price * #{quantity}
+        FROM album
+        WHERE album_no = #{albumNo} limit 1), (SELECT store_no
+        from store
+        WHERE employee_no = #{employeeNo} limit 1), #{albumNo})
+    </insert>
+
+    <select id="searchAllAlbum" resultType="albumDTO">
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album
     </select>
 </mapper>

@@ -11,8 +11,8 @@
         <id property="stockInNo" column="stock_in_no"/>
     </resultMap>
     <insert id="insertAlbumStorage" parameterType="bangshop.music.model.dto.stock.InsertStockRequest">
-        INSERT INTO album_storage(stock, album_no,storage_no)
-        VALUES (#{quantity}, #{albumNo}, 2)
+        INSERT INTO album_storage(stock, album_no,storage_no, employee_no, store_no)
+        VALUES (#{quantity}, #{albumNo}, 2,2,2)
     </insert>
 
     <select id="isExistAlbumInStorage" parameterType="String" resultType="boolean">

@@ -23,19 +23,19 @@ public class OrderStorageService {
         }
     }
 
-    public static List<AlbumStorageDTO> findStorageStock(String number) {
+    public static List<AlbumStorageDTO> getStorageStock(int number) {
         try (SqlSession sqlSession = getSqlSession()) {
             OrderStorageMapper orderStorageMapper = sqlSession.getMapper(OrderStorageMapper.class);
-            List<AlbumStorageDTO> stock = orderStorageMapper.findStorageStock(number);
+            List<AlbumStorageDTO> stock = orderStorageMapper.getStorageStock(number);
             sqlSession.close();
             return stock;
         }
     }
 
-    public static List<AlbumStorageDTO> getAlbumStockByStorageNo(int employeeId) {
+    public static List<AlbumStorageDTO> getStoreStock(int employeeId) {
         try (SqlSession sqlSession = getSqlSession()) {
             OrderStorageMapper orderStorageMapper = sqlSession.getMapper(OrderStorageMapper.class);
-            List<AlbumStorageDTO> stock = orderStorageMapper.getAlbumStockByStorageNo(employeeId);
+            List<AlbumStorageDTO> stock = orderStorageMapper.getStoreStock(employeeId);
             sqlSession.close();
             return stock;
         }

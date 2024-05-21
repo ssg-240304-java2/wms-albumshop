@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bangshop.music.model.dao.OrderStorageMapper">
-    <!-- 창고의 앨범 재고 조회 -->
-    <select id="getAlbumStockByStorageNo" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
+    <!-- 가맹점창고의 앨범 재고 조회 -->
+    <select id="getStoreStock" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
         SELECT
         a.album_name,
         album_storage.stock AS stock,
@@ -15,19 +15,23 @@
         employee e ON album_storage.employee_no = e.employee_no
         LEFT JOIN
         store s ON album_storage.employee_no = s.employee_no
-        Left JOIN
+        LEFT JOIN
         album a on album_storage.album_no = a.album_no
         WHERE
         e.employee_no = #{number}
     </select>
 
+    <!--주문내역 조회 -->
     <select id="findOrder" resultType="bangshop.music.model.dto.OrderDTO">
-        select order_no, order_date, s.store_name,a.album_name, quantity, total_price from orders
-        left join album a on orders.album_no = a.album_no
-        left join store s on orders.store_no = s.store_no;
+        SELECT order_no, order_date, s.store_name, a.album_name, quantity, total_price from orders
+        LEFT JOIN album a on orders.album_no = a.album_no
+        LEFT JOIN store s on orders.store_no = s.store_no;
     </select>
 
-    <select id="findStorageStock" parameterType="String" resultType="bangshop.music.model.dto.AlbumStorageDTO">
-        select * from album_storage where storage_no = #{number}
+    <!-- 본사창고의 앨범 재고 조회 -->
+    <select id="getStorageStock" parameterType="int" resultType="bangshop.music.model.dto.AlbumStorageDTO">
+        SELECT a.album_name, album_storage.stock from album_storage
+        LEFT JOIN album a On album_storage.album_no = a.album_no
+        WHERE album_storage.storage_no = #{number};
     </select>
 </mapper>

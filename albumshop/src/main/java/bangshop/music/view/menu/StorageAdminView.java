@@ -1,10 +1,7 @@
 package bangshop.music.view.menu;
 
 import bangshop.music.common.utils.IOUtils;
-import bangshop.music.controller.DispatchController;
-import bangshop.music.controller.EmployeeController;
-import bangshop.music.controller.OrderStorageController;
-import bangshop.music.controller.StorageController;
+import bangshop.music.controller.*;
 
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.AlbumDTO;
@@ -21,8 +18,9 @@ import java.util.Scanner;
 import static bangshop.music.view.menu.MainMenu.inputAccountInfo;
 
 public class StorageAdminView {
-    private final DispatchController dispatchController = new DispatchController();
-    private final StorageController storageController = new StorageController();
+    private final DispatchController DISPATCHCONTROLLER = new DispatchController();
+    private final StorageController STORAGECONTROLLER = new StorageController();
+    private final SearchController SEARCHCONTROLLER = new SearchController();
 
     public void storageAdminMenu() {
         EmployeeController employeeController = new EmployeeController();
@@ -35,25 +33,26 @@ public class StorageAdminView {
 
                 System.out.println("===============================");
                 switch (menu) {
-                    case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
-                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
+                    case SHOW_ALBUM -> SEARCHCONTROLLER.searchAllAlbum();
+                    case REGISTER_ALBUM -> STORAGECONTROLLER.insertAlbum(inputAlbum());
+                    case STORAGE_STOCK -> OrderStorageController.getStorageStock(2);
                     case ORDERS -> OrderStorageController.findOrder();
-                    case STOCK_IN -> storageController.insertStock(inStockAlbum());
-                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
+                    case STOCK_IN -> STORAGECONTROLLER.insertStock(inStockAlbum());
+                    case STOCK_IN_LIST -> STORAGECONTROLLER.getStockList(new StockInDTO());
                     case STOCK_OUT -> {
-                        dispatchController.findStockOuts(StockOutStatus.WAITING);
-                        dispatchController.dispatch();
+                        DISPATCHCONTROLLER.findStockOuts(StockOutStatus.WAITING);
+                        DISPATCHCONTROLLER.dispatch();
                     }
-                    case STOCK_OUT_LIST -> dispatchController.findStockOuts(StockOutStatus.COMPLETE);
+                    case STOCK_OUT_LIST -> DISPATCHCONTROLLER.findStockOuts(StockOutStatus.COMPLETE);
                     case CREATE_ACCOUNT -> employeeController.createAccount(inputEmployeeInfo());
                     case SEARCH_STORE -> employeeController.findStoreByKeyword(inputKeyword());
                     case SEARCH_EMPLOYEE -> employeeController.findEmployeeByName(inputEmployeeName());
                     case LOG_OUT -> {
                         System.out.println();
                         return;
-                        }
                     }
-                } catch (Exception e) {
+                }
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -111,10 +110,10 @@ public class StorageAdminView {
     }
 
     public static void displayStorage(List<AlbumStorageDTO> stock) {
-        if(stock == null) { 
+        if(stock == null) {
             System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
-        }  
-        else {  
+        }
+        else {
             System.out.println("-------------앨범별 재고목록-------------");
             for(AlbumStorageDTO storage : stock) {
                 System.out.println(storage);

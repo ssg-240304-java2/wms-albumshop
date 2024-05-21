@@ -22,4 +22,8 @@
     <select id="selectEmployeeByName" parameterType="String" resultType="bangshop.music.model.dto.EmployeeDTO">
         select employee_no, name, id, password, role_no, role_name from employee join role using(role_no) where name like CONCAT('%', #{name}, '%')
     </select>
+
+    <delete id="removeEmployeeById" parameterType="String">
+        delete from employee where id=#{id}
+    </delete>
 </mapper>

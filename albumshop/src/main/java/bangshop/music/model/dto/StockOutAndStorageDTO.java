@@ -16,4 +16,5 @@ public class StockOutAndStorageDTO {
     private StockOutStatus status;
     private StorageDTO storage;
     private OrderDTO order;
+    private AlbumDTO album;
 }
