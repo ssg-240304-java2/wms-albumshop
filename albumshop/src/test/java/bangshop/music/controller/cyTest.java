@@ -32,6 +32,19 @@ public class cyTest {
         employeeService.removeEmployeeById(employee.getId());
     }
 
+    @Test
+    @DisplayName("관리자는 이름으로 직원을 조회할 수 있다.")
+    void searchEmployeeByName() {
+        // given
+        EmployeeDTO employee = createEmployee();
+
+        // when
+        employeeService.registerEmployee(employee);
+
+        // then
+        List<EmployeeDTO> employees = employeeService.findEmployeeByName(employee.getName());
+        employees.forEach(e -> assertThat(e.getName()).contains(employee.getName()));
+    }
 
 
     @Test
