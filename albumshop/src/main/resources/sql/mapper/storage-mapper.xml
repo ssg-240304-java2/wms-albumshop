@@ -2,11 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bangshop.music.model.dao.OrderMapper">
+<mapper namespace="bangshop.music.model.dao.StorageMapper">
 
-    <select id="getById" resultType="orderDTO">
+    <select id="findByType" resultType="storageDTO">
         select *
-            from orders
-        where order_no = #{orderNo}
+            from storage
+        where type = #{type}
     </select>
+
 </mapper>

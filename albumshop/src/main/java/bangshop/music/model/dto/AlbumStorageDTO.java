@@ -14,9 +14,29 @@ public class AlbumStorageDTO {
     private Integer employeeNo;
     private String storeName;
     private String albumName;
-    public void stockDecrease(int quantity) {
+
+    public static AlbumStorageDTO from(OrderDTO order) {
+        return new AlbumStorageDTO(
+                null,
+                order.getQuantity(),
+                order.getAlbumNo(),
+                order.getStore().getStorageNo(),
+                null,
+                order.getStore().getStoreName(),
+                order.getAlbumName()
+        );
+    }
+
+    public void increaseStock(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalStateException("재고가 0개 이상이어야 합니다.");
+        }
+        this.stock += quantity;
+    }
+
+    public void decreaseStock(int quantity) {
         if (this.stock - quantity < 0) {
-            throw new IllegalStateException("재고가 부족합니다.");
+            throw new IllegalStateException("재고 수량이 부족합니다.");
         }
         this.stock -= quantity;
     }
