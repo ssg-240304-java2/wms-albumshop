@@ -8,6 +8,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 @Getter
 public enum StorageAdminMenu {
+    SHOW_ALBUM("0", "앨범 목록"),
     REGISTER_ALBUM("1","앨범 입고"),
     STORAGE_STOCK("2", "앨범 재고 확인"),
     STOCK_IN("3", "앨범 재고 변경"),
