@@ -31,5 +31,6 @@
         <mapper resource="sql/mapper/order-mapper.xml"/>
         <mapper resource="sql/mapper/storage-mapper.xml"/>
         <mapper resource="sql/mapper/sc-query.xml"/>
+        <mapper resource="sql/mapper/sc2-query.xml"/>
     </mappers>
 </configuration>
