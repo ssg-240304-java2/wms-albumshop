@@ -15,6 +15,26 @@ public class cyTest {
     EmployeeService employeeService = new EmployeeService();
 
     @Test
+    @DisplayName("사용자는 로그인 할 수 있다.")
+    void login() {
+        // given
+        EmployeeDTO employee = createEmployee();
+        employeeService.registerEmployee(employee);
+
+        // when
+        EmployeeDTO foundEmployee = employeeService.findEmployeeById(employee.getId());
+
+        // then
+        assertThat(employee.getId()).isEqualTo(foundEmployee.getId());
+        assertThat(employee.getPassword()).isEqualTo(foundEmployee.getPassword());
+
+        // clean up
+        employeeService.removeEmployeeById(employee.getId());
+    }
+
+
+
+    @Test
     @DisplayName("관리자는 새로운 계정을 생성할 수 있다.")
     void createAccount() {
         // given
