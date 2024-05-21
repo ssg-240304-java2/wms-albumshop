@@ -1,35 +1,51 @@
 package bangshop.music.controller;
 
+import bangshop.music.model.dao.EmployeeMapper;
 import bangshop.music.model.dto.EmployeeDTO;
 import bangshop.music.model.dto.StoreDTO;
 import bangshop.music.model.service.EmployeeService;
+import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@Transactional
 public class cyTest {
     EmployeeService employeeService = new EmployeeService();
+    EmployeeMapper employeeMapper;
 
     @Test
     @DisplayName("사용자는 로그인 할 수 있다.")
     void login() {
         // given
         EmployeeDTO employee = createEmployee();
-        employeeService.registerEmployee(employee);
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.insertEmployee(employee);
+            sqlSession.commit();
+        }
 
         // when
-        EmployeeDTO foundEmployee = employeeService.findEmployeeById(employee.getId());
+        EmployeeDTO foundEmployee;
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            foundEmployee = employeeMapper.findEmployeeById(employee.getId());
+            sqlSession.commit();
+        }
 
         // then
         assertThat(employee.getId()).isEqualTo(foundEmployee.getId());
         assertThat(employee.getPassword()).isEqualTo(foundEmployee.getPassword());
 
         // clean up
-        employeeService.removeEmployeeById(employee.getId());
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.removeEmployeeById(employee.getId());
+            sqlSession.commit();
+        }
     }
 
     @Test
@@ -39,10 +55,19 @@ public class cyTest {
         EmployeeDTO employee = createEmployee();
 
         // when
-        employeeService.registerEmployee(employee);
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.insertEmployee(employee);
+            sqlSession.commit();
+        }
 
         // then
-        List<EmployeeDTO> employees = employeeService.findEmployeeByName(employee.getName());
+        List<EmployeeDTO> employees;
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employees = employeeMapper.selectEmployeeByName(employee.getName());
+            sqlSession.commit();
+        }
         employees.forEach(e -> assertThat(e.getName()).contains(employee.getName()));
     }
 
@@ -53,7 +78,13 @@ public class cyTest {
         String keyword = "하늘";
 
         // when
-        List<StoreDTO> stores = employeeService.findStoreByKeyword(keyword);
+        List<StoreDTO> stores;
+
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            stores = employeeMapper.selectStoreByKeyword(keyword);
+            sqlSession.commit();
+        }
 
         // then
         stores.forEach(s -> {
@@ -70,14 +101,27 @@ public class cyTest {
         EmployeeDTO employee = createEmployee();
 
         // when
-        employeeService.registerEmployee(employee);
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.insertEmployee(employee);
+            sqlSession.commit();
+        }
 
         // then
-        EmployeeDTO foundEmployee = employeeService.findEmployeeById(employee.getId());
+        EmployeeDTO foundEmployee;
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            foundEmployee = employeeMapper.findEmployeeById(employee.getId());
+            sqlSession.commit();
+        }
         assertThat(employee).isEqualTo(foundEmployee);
 
         // clean up
-        employeeService.removeEmployeeById(employee.getId());
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.removeEmployeeById(employee.getId());
+            sqlSession.commit();
+        }
     }
 
     EmployeeDTO createEmployee() {
