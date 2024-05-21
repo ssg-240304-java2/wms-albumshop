@@ -23,10 +23,7 @@ public class DispatchService {
         try (SqlSession sqlSession = getSqlSession()) {
             StockOutMapper mapper = sqlSession.getMapper(StockOutMapper.class);
 
-            List<StockOutAndStorageDTO> stockOuts = mapper.findStockOuts(status);
-
-            sqlSession.close();
-            return stockOuts;
+            return mapper.findStockOuts(status);
         }
     }
 
@@ -54,8 +51,9 @@ public class DispatchService {
             int storageNo = storageMapper.findByType("본사창고")
                     .map(StorageDTO::getStorageNo)
                     .orElseThrow(() -> new IllegalStateException("본사 창고를 찾을 수 없습니다."));
+
             AlbumStorageDTO headquartersStorage = albumStorageMapper.find(order.getAlbumNo(), storageNo)
-                    .orElseThrow(() -> new IllegalStateException("본사 창고를 찾을 수 없습니다."));
+                    .orElseThrow(() -> new IllegalStateException("해당 앨범은 창고에 재고가 없습니다."));
             headquartersStorage.decreaseStock(order.getQuantity());
             albumStorageMapper.update(headquartersStorage);
 
