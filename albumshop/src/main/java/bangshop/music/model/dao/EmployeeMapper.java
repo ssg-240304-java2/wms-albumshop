@@ -16,4 +16,6 @@ public interface EmployeeMapper {
     List<StoreDTO> selectStoreByKeyword(String keyword);
 
     List<EmployeeDTO> selectEmployeeByName(String name);
+
+    void removeEmployeeById(String id);
 }

@@ -47,4 +47,12 @@ public class EmployeeService {
             return employeeList;
         }
     }
+
+    public void removeEmployeeById(String id) {
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.removeEmployeeById(id);
+            sqlSession.commit();
+        }
+    }
 }
