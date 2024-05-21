@@ -45,6 +45,7 @@ public class cyTest {
             employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
             employeeMapper.removeEmployeeById(employee.getId());
             sqlSession.commit();
+            System.out.println("cyTest.login");
         }
     }
 
@@ -69,6 +70,14 @@ public class cyTest {
             sqlSession.commit();
         }
         employees.forEach(e -> assertThat(e.getName()).contains(employee.getName()));
+
+        // clean up
+        try (SqlSession sqlSession = getSqlSession()) {
+            employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            employeeMapper.removeEmployeeById(employee.getId());
+            sqlSession.commit();
+            System.out.println("cyTest.login");
+        }
     }
 
     @Test
