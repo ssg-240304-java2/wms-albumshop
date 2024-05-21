@@ -16,11 +16,6 @@ public class OrderStorageController {
 
     private static OrderStorageService orderStorageService = new OrderStorageService();
 
-
-    public OrderStorageController() {
-        orderStorageService = new OrderStorageService();
-    }
-
     public static void findOrder() {
         try {
             List<OrderDTO> order = OrderStorageService.findOrder();
@@ -30,18 +25,18 @@ public class OrderStorageController {
             ErrorView.displayError(ErrorCode.STOCK_ERROR);
         }
     }
-    public static void findStorageStock(String number) {
+    public static void getStorageStock(int number) {
         try {
-            List<AlbumStorageDTO> storage = OrderStorageService.findStorageStock(number);
+            List<AlbumStorageDTO> storage = OrderStorageService.getStorageStock(number);
             StorageAdminView.displayStorage(storage);
         } catch (Exception e) {
             e.printStackTrace();
             ErrorView.displayError(ErrorCode.STOCK_ERROR);
         }
     }
-    public static void findstoreStock(int number){
+    public static void getStoreStock(int number){
         try {
-            List<AlbumStorageDTO> storage = OrderStorageService.getAlbumStockByStorageNo(number);
+            List<AlbumStorageDTO> storage = OrderStorageService.getStoreStock(number);
             StoreManagerView.displayStorage(storage);
         } catch (Exception e) {
             e.printStackTrace();

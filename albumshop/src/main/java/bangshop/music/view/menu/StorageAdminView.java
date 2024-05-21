@@ -36,7 +36,7 @@ public class StorageAdminView {
                 System.out.println("===============================");
                 switch (menu) {
                     case REGISTER_ALBUM -> storageController.insertAlbum(inputAlbum());
-                    case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
+                    case STORAGE_STOCK -> OrderStorageController.getStorageStock(2);
                     case ORDERS -> OrderStorageController.findOrder();
                     case STOCK_IN -> storageController.insertStock(inStockAlbum());
                     case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
@@ -51,9 +51,9 @@ public class StorageAdminView {
                     case LOG_OUT -> {
                         System.out.println();
                         return;
-                        }
                     }
-                } catch (Exception e) {
+                }
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -111,10 +111,10 @@ public class StorageAdminView {
     }
 
     public static void displayStorage(List<AlbumStorageDTO> stock) {
-        if(stock == null) { 
+        if(stock == null) {
             System.out.println("> 😅😅😅 조회된 재고가 없습니다. 😅😅😅");
-        }  
-        else {  
+        }
+        else {
             System.out.println("-------------앨범별 재고목록-------------");
             for(AlbumStorageDTO storage : stock) {
                 System.out.println(storage);
