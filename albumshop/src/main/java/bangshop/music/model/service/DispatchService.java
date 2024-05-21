@@ -55,7 +55,7 @@ public class DispatchService {
                     .map(StorageDTO::getStorageNo)
                     .orElseThrow(() -> new IllegalStateException("본사 창고를 찾을 수 없습니다."));
             AlbumStorageDTO headquartersStorage = albumStorageMapper.find(order.getAlbumNo(), storageNo)
-                    .orElseThrow(() -> new IllegalStateException("본사 창고를 찾을 수 없습니다."));;
+                    .orElseThrow(() -> new IllegalStateException("본사 창고를 찾을 수 없습니다."));
             headquartersStorage.decreaseStock(order.getQuantity());
             albumStorageMapper.update(headquartersStorage);
 
