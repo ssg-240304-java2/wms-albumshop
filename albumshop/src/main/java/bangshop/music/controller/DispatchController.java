@@ -37,7 +37,7 @@ public class DispatchController {
 
     private String format(StockOutAndStorageDTO stockOut) {
         return "주문 번호: " + stockOut.getOrder().getOrderNo() + ", " +
-                "앨범 정보: " + stockOut.getOrder().getAlbumNo() + ", " +
+                "앨범 정보: " + stockOut.getAlbum().getAlbumName() + ", " +
                 "주문 수량: " + stockOut.getOrder().getQuantity() + ", " +
                 "출고 상태: " + stockOut.getStatus().getDescription() + ", " +
                 "출고 일자: " + stockOut.getStockOutDate() + ", " +

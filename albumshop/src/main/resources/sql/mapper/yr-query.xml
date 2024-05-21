@@ -10,6 +10,11 @@
         <result property="status" column="status" javaType="StockOutStatus"/>
         <association property="storage" resultMap="storageResultMap"/>
         <association property="order" resultMap="orderResultMap"/>
+        <association property="album" resultMap="albumResultMap"/>
+    </resultMap>
+
+    <resultMap id="albumResultMap" type="albumDTO">
+        <id property="albumName" column="album_name"/>
     </resultMap>
 
     <resultMap id="storageResultMap" type="storageDTO">
@@ -42,17 +47,19 @@
 
     <select id="findStockOuts" resultMap="stockOutResultMap">
         select
-        so.stock_out_no,
-        so.order_no,
-        so.status,
-        so.stock_out_date,
-        o.album_no,
-        o.quantity,
-        o.store_no,
-        s.storage_no
+            so.stock_out_no,
+            so.order_no,
+            so.status,
+            so.stock_out_date,
+            o.album_no,
+            o.quantity,
+            o.store_no,
+            s.storage_no,
+            a.album_name
         from stock_out so
-        join orders o on so.order_no = o.order_no
-        join storage s on so.storage_no = s.storage_no
+            join orders o on so.order_no = o.order_no
+            join album a on o.album_no = a.album_no
+            join storage s on so.storage_no = s.storage_no
         <where>
             <if test="status != null">
                 status = #{status}
@@ -81,5 +88,4 @@
             order_no = #{orderNo}
         where stock_out_no = #{stockOutNo}
     </update>
-    
 </mapper>
