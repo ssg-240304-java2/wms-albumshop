@@ -31,18 +31,12 @@
         insert into album_storage(
             stock,
             album_no,
-            storage_no,
-            employee_no,
-            store_name,
-            album_name
+            storage_no
         )
         values (
             #{stock},
             #{albumNo},
-            #{storageNo},
-            #{employeeNo},
-            #{storeName},
-            #{albumName}
+            #{storageNo}
         )
     </insert>
 </mapper>

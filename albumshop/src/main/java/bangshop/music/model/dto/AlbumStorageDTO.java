@@ -15,15 +15,19 @@ public class AlbumStorageDTO {
     private String storeName;
     private String albumName;
 
+    public AlbumStorageDTO(Integer albumStorageNo, Integer stock, String albumNo, Integer storageNo) {
+        this.albumStorageNo = albumStorageNo;
+        this.stock = stock;
+        this.albumNo = albumNo;
+        this.storageNo = storageNo;
+    }
+
     public static AlbumStorageDTO from(OrderDTO order) {
         return new AlbumStorageDTO(
                 null,
                 order.getQuantity(),
                 order.getAlbumNo(),
-                order.getStore().getStorageNo(),
-                null,
-                order.getStore().getStoreName(),
-                order.getAlbumName()
+                order.getStore().getStorageNo()
         );
     }
 
