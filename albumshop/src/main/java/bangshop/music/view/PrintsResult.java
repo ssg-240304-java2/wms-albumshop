@@ -19,8 +19,8 @@ public class PrintsResult {
             case "updateAlbumStorage" : errorMessage = "입고를 실패하였습니다.(update)"; break;
             case "insertAlbumStorage" : errorMessage = "입고를 실패하였습니다.(insert)"; break;
             case "insertStockIn" : errorMessage = "입고내역 업데이트에 실패하였습니다.(insert)"; break;
-
-        }
+            case "insertAlbum" : errorMessage = "앨범 등록에 실패하였습니다.";
+         }
         return errorMessage;
 
     }
@@ -35,7 +35,7 @@ public class PrintsResult {
             case "updateAlbumStorage" : successMessage = "입고를 성공하였습니다.(update)"; break;
             case "insertAlbumStorage" : successMessage = "입고를 성공하였습니다.(insert)"; break;
             case "insertStockIn" : successMessage = "입고내역 업데이트에 성공하였습니다.(insert)"; break;
-
+            case "insertAlbum" : successMessage = "앨범 등록을 성공하였습니다.";
 
         }
         return successMessage;
