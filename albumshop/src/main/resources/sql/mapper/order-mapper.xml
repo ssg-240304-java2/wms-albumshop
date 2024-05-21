@@ -9,4 +9,20 @@
             from orders
         where order_no = #{orderNo}
     </select>
+
+    <insert id="order" parameterType="map">
+        INSERT INTO orders(order_date, quantity, total_price, store_no, album_no)
+        VALUES
+        (NOW(), #{quantity}, (SELECT price * #{quantity}
+        FROM album
+        WHERE album_no = #{albumNo} limit 1), (SELECT store_no
+        from store
+        WHERE employee_no = #{employeeNo} limit 1), #{albumNo})
+    </insert>
+
+    <insert id="insertStockOut">
+        INSERT INTO stock_out(storage_no, order_no) VALUES ((SELECT store_no
+        FROM store
+        WHERE employee_no=#{employeeNo}),(SELECT MAX(order_no) FROM orders));
+    </insert>
 </mapper>

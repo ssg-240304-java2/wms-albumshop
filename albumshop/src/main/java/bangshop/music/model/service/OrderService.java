@@ -14,15 +14,33 @@ import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 
 public class OrderService {
 
-    SqlSession sqlSession = getSqlSession();
-
-    public int order(String albumNo, int quantity , int employeeNo) {
+    public int order(String albumNo, int quantity, int employeeNo) {
         try (SqlSession sqlSession = getSqlSession()) {
             OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
             int result = orderMapper.order(albumNo, quantity, employeeNo);
 
-            sqlSession.commit();
+            if (result > 0) {
+                sqlSession.commit();
+            } else {
+                sqlSession.rollback();
+            }
             return result;
         }
     }
+
+    public boolean insertStockOut(int employeeNo) {
+        try (SqlSession sqlSession = getSqlSession()) {
+            OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+            int result = orderMapper.insertStockOut(employeeNo);
+
+            if (result > 0) {
+                sqlSession.commit();
+            } else {
+                sqlSession.rollback();
+            }
+            return result > 0;
+        }
+    }
+
+
 }
