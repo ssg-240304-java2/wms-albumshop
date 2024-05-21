@@ -17,11 +17,6 @@ public class SearchController {
 
         List<AlbumDTO> albumList = searchService.searchAlbumByTitle(sc.nextLine());
         searchResultView.displayAlbumList(albumList, employeeNo);
-//        System.out.println("-".repeat(100));
-//        System.out.println("번호\t앨범번호\t가수\t앨범이름\t발매일\t가격");
-//        System.out.println("-".repeat(100));
-//        for (int i = 0; i < albumList.size(); i++) {
-//            AlbumDTO album = albumList.get(i);
     }
 
     public void searchAlbumBySinger(int employeeNo) {

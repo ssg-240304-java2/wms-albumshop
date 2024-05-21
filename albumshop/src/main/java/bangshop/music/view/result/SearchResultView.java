@@ -32,8 +32,14 @@ public class SearchResultView {
                 OrderService orderService = new OrderService();
 
                 int quantity = Integer.parseInt(IOUtils.input("수량을 입력해주세요: "));
-                String albumNo = albumList.get(Integer.parseInt(input)).getAlbumNo();
+                String albumNo = albumList.get(Integer.parseInt(input)-1).getAlbumNo();
                 int result = orderService.order(albumNo, quantity, employeeNo);
+                if (result > 0) {
+                    System.out.println("주문에 성공했습니다.");
+                } else {
+                    System.out.println("주문 실패!");
+                }
+                break;
             } else {
                 if (input.toLowerCase().equals("q")) {
                     break;
