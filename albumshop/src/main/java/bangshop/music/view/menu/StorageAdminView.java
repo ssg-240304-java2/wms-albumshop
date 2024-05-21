@@ -40,7 +40,7 @@ public class StorageAdminView {
                     case STORAGE_STOCK -> OrderStorageController.findStorageStock("2");
                     case ORDERS -> OrderStorageController.findOrder();
                     case STOCK_IN -> storageController.insertStock(inStockAlbum());
-                    case STOCK_IN_LIST -> storageController.getStockList(new StockInDTO());
+                    case STOCK_IN_LIST -> storageController.getStockList(null);
                     case STOCK_OUT -> {
                         dispatchController.findStockOuts(StockOutStatus.WAITING);
                         dispatchController.dispatch();
