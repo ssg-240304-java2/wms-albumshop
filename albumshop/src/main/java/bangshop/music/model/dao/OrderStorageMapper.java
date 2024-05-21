@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderStorageMapper {
-    List<AlbumStorageDTO> findStorageStock(String number);
+    List<AlbumStorageDTO> getStorageStock(int number);
 
     List<OrderDTO> findOrder();
 
-    List<AlbumStorageDTO> getAlbumStockByStorageNo(int employeeId);
+    List<AlbumStorageDTO> getStoreStock(int employeeId);
 }
