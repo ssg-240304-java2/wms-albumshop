@@ -46,6 +46,22 @@ public class cyTest {
         employees.forEach(e -> assertThat(e.getName()).contains(employee.getName()));
     }
 
+    @Test
+    @DisplayName("관리자는 지점명이나 주소로 지점을 조회할 수 있다.")
+    void searchStoreByKeyword() {
+        // given
+        String keyword = "하늘";
+
+        // when
+        List<StoreDTO> stores = employeeService.findStoreByKeyword(keyword);
+
+        // then
+        stores.forEach(s -> {
+            boolean doesNameContainsKeyword = s.getStoreName().contains(keyword);
+            boolean doesAddressContainsKeyword = s.getStoreAddress().contains(keyword);
+            assertThat(doesNameContainsKeyword || doesAddressContainsKeyword).isTrue();
+        });
+    }
 
     @Test
     @DisplayName("관리자는 새로운 계정을 생성할 수 있다.")
