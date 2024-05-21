@@ -44,7 +44,7 @@ public class AlbumStorageDTO {
     @Override
     public String toString() {
         return
-                "앨범명 : '" + albumName + '\'' +
+                "앨범명 : " + albumName  +
                         ", 재고수량  : " + stock;
     }
 }
