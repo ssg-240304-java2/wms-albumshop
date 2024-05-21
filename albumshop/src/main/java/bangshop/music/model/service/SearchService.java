@@ -45,4 +45,14 @@ public class SearchService {
         sqlSession.close();
         return albumList;
     }
+
+    public List<AlbumDTO> searchAllAlbum() {
+        sqlSession = getSqlSession();
+
+        SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
+        List<AlbumDTO> albumList = searchMapper.searchAllAlbum();
+        sqlSession.close();
+
+        return albumList;
+    }
 }
