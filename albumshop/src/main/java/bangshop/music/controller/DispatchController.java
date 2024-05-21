@@ -36,11 +36,18 @@ public class DispatchController {
     }
 
     private String format(StockOutAndStorageDTO stockOut) {
-        return "주문 번호: " + stockOut.getOrder().getOrderNo() + ", " +
-                "앨범 정보: " + stockOut.getAlbum().getAlbumName() + ", " +
-                "주문 수량: " + stockOut.getOrder().getQuantity() + ", " +
-                "출고 상태: " + stockOut.getStatus().getDescription() + ", " +
-                "출고 일자: " + stockOut.getStockOutDate() + ", " +
-                "창고 번호: " + stockOut.getStorage().getStorageNo();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("주문 번호: ").append(stockOut.getOrder().getOrderNo());
+        stringBuilder.append(", 앨범 정보: ").append(stockOut.getAlbum().getAlbumName());
+        stringBuilder.append(", 주문 수량: ").append(stockOut.getOrder().getQuantity());
+        stringBuilder.append(", 출고 상태: ").append(stockOut.getStatus().getDescription());
+        if (stockOut.isWaiting()) {
+            stringBuilder.append(", 주문 일자: ").append(stockOut.getOrder().getOrderDate());
+        } else {
+            stringBuilder.append(", 출고 일자: ").append(stockOut.getStockOutDate());
+        }
+        stringBuilder.append(", 창고 번호: ").append(stockOut.getStorage().getStorageNo());
+
+        return stringBuilder.toString();
     }
 }
