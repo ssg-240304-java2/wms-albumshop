@@ -17,4 +17,8 @@ public class StockOutAndStorageDTO {
     private StorageDTO storage;
     private OrderDTO order;
     private AlbumDTO album;
+
+    public boolean isWaiting() {
+        return status == StockOutStatus.WAITING;
+    }
 }
