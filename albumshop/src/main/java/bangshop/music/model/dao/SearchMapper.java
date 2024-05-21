@@ -8,4 +8,6 @@ public interface SearchMapper {
     //    List<AlbumDTO> searchAlbumByTrack(String Track);
     List<AlbumDTO> searchAlbumByNo(String albumNo);
     List<AlbumDTO> searchAlbumBySinger(String singer);
+
+    List<AlbumDTO> searchAllAlbum();
 }
