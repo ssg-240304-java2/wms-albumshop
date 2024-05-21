@@ -20,15 +20,13 @@
         WHERE singer LIKE CONCAT('%', #{singer}, '%')
     </select>
 
-    <select id="searchAlbumByNo" resultType="albumDTO">
+    <select id="searchAlbumByNo" resultType="map">
         SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
         join album a
         on a.album_no = als.album_no
         WHERE a.album_no=#{albumNo}
     </select>
-
-<!--    <insert id="order" parameterType="bangshop.music.model.dto.OrderDTO">-->
     <insert id="order">
         INSERT INTO orders(order_date, quantity, total_price, store_no, album_no)
         VALUES
@@ -38,4 +36,9 @@
         from store
         WHERE employee_no = #{employeeNo} limit 1), #{albumNo})
     </insert>
+
+    <select id="searchAllAlbum" resultType="albumDTO">
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album
+    </select>
 </mapper>

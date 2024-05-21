@@ -11,9 +11,11 @@ import org.apache.ibatis.session.SqlSession;
 
 public class SearchService {
 
-    SqlSession sqlSession = getSqlSession();
+    SqlSession sqlSession;
 
     public List<AlbumDTO> searchAlbumByTitle(String title) {
+        sqlSession = getSqlSession();
+
         SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
 
         List<AlbumDTO> albumList = searchMapper.searchAlbumByTitle(title);
@@ -23,6 +25,7 @@ public class SearchService {
     }
 
     public List<AlbumDTO> searchAlbumBySinger(String singer) {
+        sqlSession = getSqlSession();
 
         SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
 
@@ -33,12 +36,23 @@ public class SearchService {
     }
 
     public List<AlbumDTO> searchAlbumByNo(String albumNo) {
+        sqlSession = getSqlSession();
 
         SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
 
         List<AlbumDTO> albumList = searchMapper.searchAlbumByNo(albumNo);
 
         sqlSession.close();
+        return albumList;
+    }
+
+    public List<AlbumDTO> searchAllAlbum() {
+        sqlSession = getSqlSession();
+
+        SearchMapper searchMapper = sqlSession.getMapper(SearchMapper.class);
+        List<AlbumDTO> albumList = searchMapper.searchAllAlbum();
+        sqlSession.close();
+
         return albumList;
     }
 }
