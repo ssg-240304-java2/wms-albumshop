@@ -4,6 +4,7 @@ import bangshop.music.model.dao.OrderStorageMapper;
 import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.OrderDTO;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +25,7 @@ public class jhTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @DisplayName("본사창고의 재고가 제대로 보이는지")
     @Test
     public void testFindStorageStock() {
         AlbumStorageDTO albumStorage = new AlbumStorageDTO();
@@ -37,6 +39,7 @@ public class jhTest {
         assertEquals(2, storageStocks.get(0).getStorageNo());
     }
 
+    @DisplayName("주문내역이 제대로 나오는지")
     @Test
     public void testFindOrder() {
         OrderDTO order = new OrderDTO();
@@ -50,6 +53,7 @@ public class jhTest {
         assertEquals(1, orders.get(0).getOrderNo());
     }
 
+    @DisplayName("가맹점창고의 재고가 제대로 보이는지")
     @Test
     public void testGetStoreStock() {
         AlbumStorageDTO albumStorage = new AlbumStorageDTO();
