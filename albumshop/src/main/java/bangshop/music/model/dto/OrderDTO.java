@@ -20,10 +20,10 @@ public class OrderDTO {
     public String toString() {
         return
                 "주문번호 : " + orderNo +
-                ", 주문날짜 : '" + orderDate + '\'' +
-                        ", 가맹점명 : '" + storeName + '\'' +
-                        ", 앨범명 : '" + albumName + '\'' +
-                ", 주문수량 : " + quantity +
-                ", 총 금액 : " + totalPrice;
+                        ", 주문날짜 : " + orderDate +
+                        ", 가맹점명 : " + storeName +
+                        ", 앨범명 : " + albumName +
+                        ", 주문수량 : " + quantity +
+                        ", 총 금액 : " + totalPrice;
     }
 }

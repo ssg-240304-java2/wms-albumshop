@@ -24,7 +24,7 @@ public class StoreManagerView {
             switch (menu) {
                 case SEARCH_ALBUM -> searchAlbum(emp.getEmployeeNo());
                 case ORDERS -> orderController.order(emp.getEmployeeNo());
-                case STOCK_INFO -> OrderStorageController.findstoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
+                case STOCK_INFO -> OrderStorageController.getStoreStock(emp.getEmployeeNo());//TODO: 앨범 재고 조회
                 case LOG_OUT -> {
                     System.out.println();
                     return;
