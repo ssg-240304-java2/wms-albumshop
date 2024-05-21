@@ -27,8 +27,6 @@
         on a.album_no = als.album_no
         WHERE a.album_no=#{albumNo}
     </select>
-
-<!--    <insert id="order" parameterType="bangshop.music.model.dto.OrderDTO">-->
     <insert id="order">
         INSERT INTO orders(order_date, quantity, total_price, store_no, album_no)
         VALUES
