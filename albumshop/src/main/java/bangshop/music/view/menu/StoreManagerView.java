@@ -7,7 +7,6 @@ import bangshop.music.model.dto.AlbumStorageDTO;
 import bangshop.music.model.dto.EmployeeDTO;
 
 import bangshop.music.controller.SearchController;
-import bangshop.music.model.service.OrderService;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class StoreManagerView {
     }
 
     private static void displayMenu() {
-        System.out.println("==========점장메뉴 메뉴==========");
+        System.out.println("==========점장 메뉴==========");
         for (StoreManagerMenu menu : StoreManagerMenu.values()) {
             System.out.println(menu.getCode() + ". " + menu.getTitle());
         }
