@@ -5,10 +5,8 @@
 <mapper namespace="bangshop.music.model.dao.SearchMapper">
 
     <select id="searchAlbumByTitle" resultType="albumDTO">
-        SELECT a.album_no, singer, album_name, release_date, price
-        FROM album_storage als
-        join album a
-        on a.album_no = als.album_no
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album
         WHERE album_name LIKE CONCAT('%', #{title}, '%')
     </select>
 

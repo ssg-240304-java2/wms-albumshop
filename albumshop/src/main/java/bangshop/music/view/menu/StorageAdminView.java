@@ -116,6 +116,7 @@ public class StorageAdminView {
         else {
             System.out.println("-------------앨범별 재고목록-------------");
             for(AlbumStorageDTO storage : stock) {
+//                System.out.println(storage.adminToString());
                 System.out.println(storage);
             }
             System.out.println("----------------------------");
