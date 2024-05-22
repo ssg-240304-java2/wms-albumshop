@@ -28,8 +28,10 @@ public class SearchResultView {
                     int quantity = Integer.parseInt(IOUtils.input("수량을 입력해주세요: "));
                     String albumNo = albumList.get(Integer.parseInt(input) - 1).getAlbumNo();
                     int result = orderService.order(albumNo, quantity, employeeNo);
-                    if (result > 0) {
-                        System.out.println("주문에 성공했습니다.");
+                    boolean result2 = orderService.insertStockOut(employeeNo);
+
+                    if (result > 0 && result2) {
+                        System.out.println("주문에 성공했습니다.\n");
                     } else {
                         System.out.println("주문 실패!");
                     }

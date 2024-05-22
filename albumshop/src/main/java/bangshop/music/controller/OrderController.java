@@ -19,7 +19,7 @@ public class OrderController {
         boolean result2 = orderService.insertStockOut(employeeNo);
 
         if (result > 0 && result2) {
-            System.out.println("주문에 성공했습니다.");
+            System.out.println("주문에 성공했습니다.\n");
         } else {
             System.out.println("주문 실패!");
         }
