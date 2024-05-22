@@ -5,27 +5,31 @@
 <mapper namespace="bangshop.music.model.dao.SearchMapper">
 
     <select id="searchAlbumByTitle" resultType="albumDTO">
-        SELECT a.album_no, singer, album_name, release_date, price
-        FROM album_storage als
-        join album a
-        on a.album_no = als.album_no
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album
         WHERE album_name LIKE CONCAT('%', #{title}, '%')
     </select>
 
     <select id="searchAlbumBySinger" resultType="albumDTO">
-        SELECT a.album_no, singer, album_name, release_date, price
+        <!--SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
         join album a
         on a.album_no = als.album_no
+        WHERE singer LIKE CONCAT('%', #{singer}, '%')-->
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album
         WHERE singer LIKE CONCAT('%', #{singer}, '%')
     </select>
 
     <select id="searchAlbumByNo" resultType="albumDTO">
-        SELECT a.album_no, singer, album_name, release_date, price
+        <!--SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
         join album a
         on a.album_no = als.album_no
-        WHERE a.album_no=#{albumNo}
+        WHERE a.album_no=#{albumNo}-->
+        SELECT album_no, singer, album_name, release_date, price
+        FROM album als
+        WHERE album_no=#{albumNo}
     </select>
     <insert id="order">
         INSERT INTO orders(order_date, quantity, total_price, store_no, album_no)

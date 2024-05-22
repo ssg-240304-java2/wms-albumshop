@@ -51,4 +51,11 @@ public class AlbumStorageDTO {
                 "앨범명 : " + albumName  +
                         ", 재고수량  : " + stock;
     }
+
+    public String adminToString() {
+        return
+                "앨범번호 : " + albumNo +
+                ", 앨범명 : " + albumName  +
+                        ", 재고수량  : " + stock;
+    }
 }
