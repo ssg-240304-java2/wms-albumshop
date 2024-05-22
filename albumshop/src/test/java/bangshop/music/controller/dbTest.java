@@ -3,22 +3,21 @@ package bangshop.music.controller;
 import bangshop.music.model.dao.StockInMapper;
 import bangshop.music.model.dto.AlbumDTO;
 import bangshop.music.model.dto.stock.InsertStockRequest;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.sql.Date;
 
 import static bangshop.music.common.MyBatisTemplate.getSqlSession;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
-
-public class dbTest{
+public class dbTest {
     private SqlSession sqlSession;
-    StockInMapper mapper;
+    private StockInMapper mapper;
+
     @BeforeEach
     void setUp() {
         this.sqlSession = getSqlSession();
@@ -27,47 +26,52 @@ public class dbTest{
 
     @AfterEach
     void tearDown() {
-//        this.sqlSession.commit(); // 생략해도 Sqlsession해제시 자동커밋된다.
         this.sqlSession.rollback();
         this.sqlSession.close();
     }
 
-    //CRUD
+    // CRUD
     @DisplayName("앨범추가")
     @Test
-    void insertAlbum(){
+    void insertAlbum() {
         String albumNo = "ALBUM_NO2";
         String albumName = "ALBUM_NAME";
         String singer = "ALBUM_SINGER";
-        Date release_date = Date.valueOf( "2023-05-07" );
-        int price = 50000 ;
-        AlbumDTO album = new AlbumDTO(albumNo, albumName,singer,release_date,price);
-        //when
+        Date releaseDate = Date.valueOf("2023-05-07");
+        int price = 50000;
+        AlbumDTO album = new AlbumDTO(albumNo, albumName, singer, releaseDate, price);
+
+        // When
         Integer result = mapper.insertAlbum(album);
-        //Then
-        assertThat(result);
+
+        // Then
+        assertThat(result).isEqualTo(1); // Expecting the result to be 1 if the insert was successful
     }
 
     @DisplayName("앨범창고에 해당 앨범 존재 여부 확인")
     @Test
     void isExistAlbumInStorage() {
-        String album_no = "ALBUM_NO3";
-        boolean result = mapper.isExistAlbumInStorage(album_no);
+        String albumNo = "ALBUM_NO3";
+        boolean result = mapper.isExistAlbumInStorage(albumNo);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
-
 
     @DisplayName("앨범창고에 새로운 앨범 입고")
     @Test
     void insertAlbumStorage() {
         int stock = 500;
-        String album_no = "ALBUM_NO3";
+        String albumNo = "ALBUM_NO3";
 
-        InsertStockRequest request = new InsertStockRequest(album_no,stock);
+        // First, insert the album into the album table
+        AlbumDTO album = new AlbumDTO(albumNo, "ALBUM_NAME", "ALBUM_SINGER", Date.valueOf("2023-05-07"), 50000);
+        mapper.insertAlbum(album);
+
+        // Then, insert the stock into the stock_in table
+        InsertStockRequest request = new InsertStockRequest(albumNo, stock);
         int result = mapper.insertAlbumStorage(request.getAlbumNo(), request.getQuantity());
 
-        assertThat(result).isEqualTo(1);
+        assertThat(result).isEqualTo(1); // Expecting the result to be 1 if the insert was successful
     }
 
     @DisplayName("입고내역 추가")
@@ -76,15 +80,14 @@ public class dbTest{
         String albumNo = "ALBUM_NO3";
         int quantity = 450;
 
-        InsertStockRequest request = new InsertStockRequest(albumNo, quantity);
+        // First, insert the album into the album table
+        AlbumDTO album = new AlbumDTO(albumNo, "ALBUM_NAME", "ALBUM_SINGER", Date.valueOf("2023-05-07"), 50000);
+        mapper.insertAlbum(album);
 
+        // Then, create the stock
+        InsertStockRequest request = new InsertStockRequest(albumNo, quantity);
         int result = mapper.createStock(request.getAlbumNo(), request.getQuantity());
 
-        assertThat(result).isEqualTo("true");
+        assertThat(result).isEqualTo(1);
     }
-
-
-
-
-
 }
