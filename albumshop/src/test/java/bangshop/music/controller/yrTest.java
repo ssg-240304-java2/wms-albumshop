@@ -7,6 +7,7 @@ import bangshop.music.model.domain.StockOut;
 import bangshop.music.model.domain.StockOutStatus;
 import bangshop.music.model.dto.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -43,7 +44,7 @@ public class yrTest {
         // 초기 데이터 삽입
         AlbumStorageDTO initialAlbumStorageDTO = new AlbumStorageDTO(1, 200, "1", 1, 2, "유승제마켓", "트리플엑스영록");
 
-        AlbumDTO initialAlbumDTO = new AlbumDTO("1", "Initial Album", "Initial Singer", new Date(), 1000);
+        AlbumDTO initialAlbumDTO = new AlbumDTO("1", "New Jeans", "뉴진스", new Date(), 1000);
 
         OrderDTO initialOrderDTO = new OrderDTO();
         initialOrderDTO.setOrderNo(1);
@@ -88,10 +89,11 @@ public class yrTest {
     }
 
     // AlbumStorageMapper 테스트
+    @DisplayName("앨범창고가 업데이트 테스트")
     @Test
     public void testUpdateAlbumStorage() {
         // given
-        AlbumStorageDTO albumStorageDTO = new AlbumStorageDTO(1, 300, "1", 1, 3, "새로운 마켓", "새로운 영록");
+        AlbumStorageDTO albumStorageDTO = new AlbumStorageDTO(1, 300, "1", 1, 3, "마켓컬리", "송재혁");
 
         // when
         albumStorageMapper.update(albumStorageDTO);
@@ -100,10 +102,11 @@ public class yrTest {
         verify(albumStorageMapper, times(1)).update(albumStorageDTO);
     }
 
+    @DisplayName("앨범창고가 없으면 저장 테스트")
     @Test
     public void testSaveAlbumStorage() {
         // given
-        AlbumStorageDTO albumStorageDTO = new AlbumStorageDTO(2, 400, "2", 2, 3, "또 다른 마켓", "다른 영록");
+        AlbumStorageDTO albumStorageDTO = new AlbumStorageDTO(2, 400, "2", 2, 3, "알리익스프레스", "육슬찬");
 
         // when
         albumStorageMapper.save(albumStorageDTO);
@@ -112,6 +115,7 @@ public class yrTest {
         verify(albumStorageMapper, times(1)).save(albumStorageDTO);
     }
 
+    @DisplayName("앨범창고를 찾을수 있는지 테스트")
     @Test
     public void testFindAlbumStorage() {
         // given
@@ -128,6 +132,7 @@ public class yrTest {
     }
 
     // OrderMapper 테스트
+    @DisplayName("주문이 제대로 들어가는가에 대한 테스트")
     @Test
     public void testOrder() {
         // given
@@ -143,6 +148,7 @@ public class yrTest {
         verify(orderMapper, times(1)).order(albumNo, quantity, employeeNo);
     }
 
+    @DisplayName("주문이 ID에 따라 불러올수 있는지 테스트")
     @Test
     public void testGetOrderById() {
         // given
@@ -158,6 +164,7 @@ public class yrTest {
     }
 
     // StockOutMapper 테스트
+    @DisplayName("출고가 제대로 업데이트 되는지 테스트")
     @Test
     public void testUpdateStockOut() {
         // given
@@ -175,6 +182,7 @@ public class yrTest {
         verify(stockOutMapper, times(1)).update(stockOut);
     }
 
+    @DisplayName("출고를 제대로 찾을수 있는지 테스트")
     @Test
     public void testFindStockOuts() {
         // given
@@ -189,6 +197,7 @@ public class yrTest {
         verify(stockOutMapper, times(1)).findStockOuts(status);
     }
 
+    @DisplayName("출고주문을 id로 찾을수 있는지 테스트")
     @Test
     public void testOrderById() {
         // given
@@ -204,6 +213,7 @@ public class yrTest {
     }
 
     // StorageMapper 테스트
+    @DisplayName("창고 구분으로 창고를 찾을수 있는지 테스트")
     @Test
     public void testFindByType() {
         // given
