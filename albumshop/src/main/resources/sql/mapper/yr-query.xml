@@ -26,6 +26,7 @@
     <resultMap id="orderResultMap" type="orderDTO">
         <id property="orderNo" column="order_no"/>
         <result property="albumNo" column="album_no"/>
+        <result property="orderDate" column="order_date"/>
         <result property="quantity" column="quantity"/>
         <association property="store" resultMap="storeResultMap"/>
     </resultMap>
@@ -52,6 +53,7 @@
             so.status,
             so.stock_out_date,
             o.album_no,
+            o.order_date,
             o.quantity,
             o.store_no,
             s.storage_no,
