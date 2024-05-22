@@ -20,7 +20,7 @@
         WHERE singer LIKE CONCAT('%', #{singer}, '%')
     </select>
 
-    <select id="searchAlbumByNo" resultType="map">
+    <select id="searchAlbumByNo" resultType="albumDTO">
         SELECT a.album_no, singer, album_name, release_date, price
         FROM album_storage als
         join album a
